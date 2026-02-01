@@ -62,18 +62,22 @@
       transform: translateY(-50%) translateX(0);
     }
 
-    /* Pestaña dorada con la palabra MENÚ */
+  /* La palabra MENÚ posicionada más a la izquierda de la pestaña */
     .floating-index::before {
       content: "MENÚ ◀";
       position: absolute;
-      left: 8px; /* Posición de la palabra en la pestaña */
+      /* VALOR CLAVE: Un número negativo la saca del borde azul hacia la izquierda */
+      left: -35px; 
       top: 50%;
       transform: translateY(-50%) rotate(-90deg);
-      font-size: 0.75rem;
-      color: var(--gold);
-      font-weight: bold;
+      font-size: 0.85rem;
+      color: var(--gold); /* Color dorado para que resalte */
+      font-weight: 800;
       letter-spacing: 3px;
       white-space: nowrap;
+      display: block;
+      /* Añadimos una pequeña sombra para que se lea sobre cualquier fondo */
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
     }
 
     .floating-index a {
@@ -397,4 +401,5 @@ window.addEventListener('wheel',e=>{
 
 </body>
 </html>
+
 

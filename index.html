@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hebreos 11 Conecta – Digital Magazine</title>
-  
+  <title>Hebreos 11 Conecta – Digital Magazine Layout</title>
   <style>
     /* =========================================
-       1. VARIABLES Y CONFIGURACIÓN BASE
+       1. VARIABLES Y BASES
        ========================================= */
     :root {
       --navy:#014574;
@@ -19,127 +18,192 @@
       --sun:#f2a93b;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', system-ui, sans-serif; }
-    html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
-    body { background: linear-gradient(180deg, #f6f1eb, #ffffff); color: #111; line-height: 1.6; overflow-x: hidden; }
+    *{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui,sans-serif;}
+    html{scroll-behavior:smooth;scroll-snap-type:y mandatory;}
+    body{background:linear-gradient(180deg,#f6f1eb,#ffffff);color:#111;line-height:1.6;overflow-x: hidden;}
 
     /* =========================================
-       2. DISEÑO DE SECCIONES (LAYOUT)
+       2. ESTRUCTURA DE SECCIONES
        ========================================= */
-    section { padding: 9rem 10vw; scroll-snap-align: start; position: relative; overflow: hidden; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
-    .art-block { background: linear-gradient(135deg, #ffffff, #f0ede6); }
-    .full-bleed { padding: 0; }
-    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    section{padding:9rem 10vw;scroll-snap-align:start;position:relative;overflow:hidden;}
+    .art-block{background:linear-gradient(135deg,#ffffff,#f0ede6);}
+    .full-bleed{padding:0;}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
 
     /* =========================================
-       3. TIPOGRAFÍA Y TÍTULOS
+       3. TIPOGRAFÍA
        ========================================= */
-    h1, h2, h3 { letter-spacing: 0.04em; font-family: 'Georgia', serif; }
-    h1 { font-size: clamp(3.5rem, 7vw, 7rem); line-height: 1.1; }
-    h2 { font-size: clamp(2rem, 4vw, 3.5rem); margin-bottom: 1rem; }
-    .kicker { color: var(--gray); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; font-size: .78rem; margin-bottom: 0.5rem; display: block; }
+    h1,h2{letter-spacing:0.04em;font-family:Georgia,serif;}
+    h3{font-family:Georgia,serif;}
 
     /* =========================================
-       4. MENÚ FLOTANTE INTELIGENTE (OCULTO)
+       4. MENÚ FLOTANTE INTELIGENTE (ACTUALIZADO)
        ========================================= */
     .floating-index {
       position: fixed;
       top: 50%;
       right: 0;
-      transform: translateY(-50%) translateX(88%); /* Escondido a la derecha */
+      transform: translateY(-50%) translateX(85%); /* Oculto inicialmente */
       display: flex;
       flex-direction: column;
       gap: .75rem;
       z-index: 99;
       background: var(--navy);
-      padding: 2rem 1.2rem;
+      padding: 2rem 1rem;
       border-radius: 30px 0 0 30px;
-      transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: -10px 0 30px rgba(0,0,0,0.3);
+      transition: transform 0.4s ease-in-out;
+      box-shadow: -5px 0 20px rgba(0,0,0,0.2);
     }
 
-    /* Muestra el menú al pasar el mouse */
-    .floating-index:hover { transform: translateY(-50%) translateX(0); }
+    .floating-index:hover {
+      transform: translateY(-50%) translateX(0); /* Se desliza al pasar el mouse */
+    }
 
-    /* Pestaña lateral que indica "MENÚ" */
     .floating-index::before {
-      content: "MENÚ ◀";
+      content: "MENU ◀";
       position: absolute;
-      left: 8px;
+      left: 5px;
       top: 50%;
       transform: translateY(-50%) rotate(-90deg);
-      font-size: 0.7rem;
+      font-size: 0.6rem;
       color: var(--gold);
       font-weight: bold;
-      letter-spacing: 3px;
+      letter-spacing: 2px;
     }
 
     .floating-index a {
       text-decoration: none;
       color: white;
       background: rgba(255, 255, 255, 0.1);
-      padding: .6rem 1.2rem;
+      padding: .6rem 1rem;
       border-radius: 999px;
       font-size: .75rem;
+      letter-spacing: .12em;
       text-transform: uppercase;
-      transition: 0.3s;
+      transition: all 0.3s ease;
       white-space: nowrap;
     }
 
-    .floating-index a:hover { background: var(--gold); color: var(--navy); transform: scale(1.05); }
+    .floating-index a:hover { background: var(--gold); color: var(--navy); }
 
     /* =========================================
-       5. HERO (PORTADA PRINCIPAL)
+       5. HERO Y ANIMACIONES
        ========================================= */
-    .hero {
-      background: linear-gradient(180deg, rgba(1,69,116,0.6), rgba(1,69,116,0.8)), url('Portada.png') center/cover;
-      color: white;
-      justify-content: flex-end;
-      align-items: flex-start;
+    .hero-title span{display:inline-block;animation:float 6s ease-in-out infinite;}
+    .hero-title span:nth-child(even){animation-delay:1.5s;}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+
+    .hero{position:relative;}
+    .bg-video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-1;opacity:.35;}
+    .hero{
+      min-height:100vh;
+      background:linear-gradient(180deg,rgba(1,69,116,.95),rgba(1,69,116,.7)),url('Portada.png') center/cover;
+      color:white;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      align-items:flex-start;
+      padding:10vh 10vw;
     }
 
-    .bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; opacity: .4; }
-
-    /* Animación de letras flotantes */
-    .hero-title span { display: inline-block; animation: float 6s ease-in-out infinite; }
-    .hero-title span:nth-child(even) { animation-delay: 1.5s; }
-    @keyframes float { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(-15px) } }
-
-    .scroll-btn { margin-top: 2.5rem; border-bottom: 2px solid var(--gold); padding: .4rem 0; color: var(--gold); text-transform: uppercase; letter-spacing: .18em; background: none; cursor: pointer; }
+    .hero h1{font-size:clamp(3.5rem,7vw,7rem);max-width:10ch;}    
+    .hero p{max-width:420px;margin:1.2rem 0;font-size:1.05rem;}
+    .scroll-btn{margin-top:2.5rem;border-bottom:2px solid var(--gold);padding:.4rem 0;color:var(--gold);text-transform:uppercase;letter-spacing:.18em;background:none;border-radius:0; cursor: pointer;}
 
     /* =========================================
-       6. TARJETAS Y COMPONENTES (BOTONES)
+       6. TARJETAS Y BLOQUES (EDITORIAL / ÍNDICE)
        ========================================= */
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 3rem; }
-    .card { background: white; border-radius: 32px; padding: 3rem; box-shadow: 0 18px 60px rgba(0,0,0,0.08); transition: 0.3s; }
-    .card:hover { transform: translateY(-10px); }
+    .img-placeholder{background:linear-gradient(135deg,var(--navy),var(--sun));height:360px;border-radius:0;opacity:.9;}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;}
+    .card{background:linear-gradient(135deg,#ffffff,var(--white));border-radius:32px;padding:3rem;text-align:left;box-shadow:0 18px 60px rgba(0,0,0,.12);position:relative;overflow:hidden;}
+    .card h3{font-size:1.1rem;margin-bottom:.6rem;letter-spacing:.02em;}
+    .card p{color:#333;font-size:.98rem;margin-bottom:1.2rem;}
 
-    .btn { display: inline-flex; align-items: center; justify-content: center; padding: .8rem 1.5rem; border-radius: 999px; text-decoration: none; font-weight: 700; transition: 0.3s; }
-    .btn.primary { background: linear-gradient(135deg, var(--navy), var(--sun)); color: white; }
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:.75rem 1.25rem;border-radius:999px;
+      border:1px solid rgba(0,0,0,.12);
+      background:transparent;color:#111;font-weight:700;
+      text-decoration:none;
+    }
+    .btn.primary{border:none;background:linear-gradient(135deg,var(--navy),var(--sun));color:white;}
+    .btn.primary:hover{opacity:.9;}
 
     /* =========================================
-       7. ELEMENTOS VISUALES (IMÁGENES Y FORMAS)
+       7. SECCIONES DE CONTENIDO (PRÉDICAS, ETC)
        ========================================= */
-    .img-magazine { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-    .motion-shape { position: absolute; width: 300px; height: 300px; border-radius: 50%; filter: blur(80px); opacity: .3; animation: drift 18s linear infinite; z-index: 0; }
-    .motion-blue { background: var(--navy); top: 10%; left: -5%; }
-    .motion-sun { background: var(--sun); bottom: 5%; right: -5%; }
-    @keyframes drift { 0%, 100% { transform: translate(0,0) } 50% { transform: translate(-30px, -50px) } }
+    .section-block{background:#fff;border-radius:18px;padding:3rem;box-shadow:0 12px 40px rgba(0,0,0,.05); margin-bottom: 2rem;}
+    .section-head{display:flex;gap:1.5rem;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;}
+    .kicker{color:var(--gray);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.78rem;}
+    .section-title{font-size:1.9rem;margin:.3rem 0 1rem 0;}
+    .section-desc{max-width:70ch;color:#222;margin-bottom:1.25rem;}
+
+    .mini-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;margin-top:2.5rem;}
+    .mini{border:none;border-radius:28px;padding:2.5rem;background:#fff;color:#111;font-size:1.05rem;box-shadow:0 18px 50px rgba(0,0,0,.15);}
+    .mini strong{display:block;margin-bottom:.35rem;}
+
+    #predicas .mini{background:linear-gradient(135deg,var(--navy),var(--sun));color:white;}
+    #testimonio .mini{background:linear-gradient(135deg,var(--rose),var(--gold));}
+    #cultura .mini{background:linear-gradient(135deg,var(--gray),var(--sun));}
+    #comunidad .mini{background:linear-gradient(135deg,var(--gold),#f6a15a);}    
+    #consejeria .mini{background:linear-gradient(135deg,var(--navy),var(--gold));color:white;}
 
     /* =========================================
-       8. RESPONSIVE (MÓVILES)
+       8. FEATURE Y VISUALES
        ========================================= */
-    @media (max-width: 900px) {
-      .two-col { grid-template-columns: 1fr; text-align: center; }
-      section { padding: 5rem 6vw; }
-      .floating-index { transform: translateY(-50%) translateX(92%); } /* Más oculto en móvil */
+    .section-video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1;opacity:.4;}
+    .motion-shape{position:absolute;width:300px;height:300px;border-radius:50%;filter:blur(80px);opacity:.35;animation:drift 18s linear infinite;}
+    .motion-blue{background:var(--navy);top:10%;left:-5%;}
+    .motion-sun{background:var(--sun);bottom:5%;right:-5%;}
+    @keyframes drift{0%{transform:translateY(0)}50%{transform:translateY(-80px)}100%{transform:translateY(0)}}
+
+    .verse-overlay{position:absolute;bottom:15%;left:10%;font-size:clamp(3rem,6vw,6rem);max-width:12ch;line-height:1.05;font-family:Georgia,serif;color:rgba(235,196,93,.95);}
+    .parallax{background-attachment:fixed;background-size:cover;background-position:center;}
+
+    .feature{background:var(--navy);color:white;position:relative;overflow:hidden;}
+    .feature .img-placeholder{height:70vh;margin:0;border-radius:0;}
+    .feature h2{font-size:3rem;margin-top:-6rem;position:relative;background:rgba(1,69,116,.85);display:inline-block;padding:1.5rem 2.5rem;}
+    .feature p{max-width:60ch;margin-top:2rem;font-size:1.05rem;}
+
+    .timeline{margin-top:3rem;border-left:3px solid var(--gold);padding-left:3rem;display:grid;gap:3rem;}
+    .node span{font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);}
+    .node p{font-size:1.2rem;margin-top:.4rem;}
+
+    /* =========================================
+       9. CTA Y FOOTER
+       ========================================= */
+    .cta{background:var(--navy);color:white;display:grid;grid-template-columns:1fr 1fr;gap:4rem; align-items: center;}
+    .cta button{background:var(--gold);border:none;padding:1rem 2rem;font-weight:700;border-radius:50px; cursor: pointer;}
+    footer{text-align:center;padding:5rem;background:#111;color:white;}
+
+    /* =========================================
+       10. RESPONSIVE
+       ========================================= */
+    @media(max-width:900px){
+      .two-col,.cta{grid-template-columns:1fr;}
+      .mini-grid{grid-template-columns: 1fr;}
+    }
+    @media(max-width:600px){
+      section{padding:4rem 6vw;}
     }
   </style>
 </head>
 <body>
 
+<script>
+let isScrolling=false;
+window.addEventListener('wheel',e=>{
+  if(isScrolling) return;
+  const dir=e.deltaY>0?1:-1;
+  const sections=[...document.querySelectorAll('section')];
+  const idx=sections.findIndex(s=>s.getBoundingClientRect().top>-10 && s.getBoundingClientRect().top<10);
+  const target=sections[idx+dir];
+  if(target){isScrolling=true;target.scrollIntoView({behavior:'smooth'});setTimeout(()=>isScrolling=false,900);}
+});
+</script>
+
   <nav class="floating-index">
-    <a href="#tema">Tema Central</a>
+    <a href="#tema">Tema</a>
     <a href="#predicas">Prédicas</a>
     <a href="#testimonio">Testimonio</a>
     <a href="#cultura">Cultura</a>
@@ -147,88 +211,173 @@
     <a href="#consejeria">Consejería</a>
   </nav>
 
-  <section class="hero">
+  <section class="hero snap">
     <video class="bg-video" autoplay muted loop playsinline>
       <source src="https://cdn.coverr.co/videos/coverr-light-rays-through-trees-1567/1080p.mp4" type="video/mp4" />
     </video>
-    <h1 class="hero-title">
-      <span>H</span><span>E</span><span>B</span><span>R</span><span>E</span><span>O</span><span>S</span> 
-      <span>1</span><span>1</span> 
-      <span>C</span><span>O</span><span>N</span><span>E</span><span>C</span><span>T</span><span>A</span>
-    </h1>
-    <p>Conectados en tiempos de cambio. Edición Febrero 2026.</p>
-    <div class="scroll-btn" onclick="document.getElementById('indice').scrollIntoView({behavior:'smooth'})">Abrir Revista ↓</div>
+    <h1 class="hero-title"><span>H</span><span>E</span><span>B</span><span>R</span><span>E</span><span>O</span><span>S</span> <span>1</span><span>1</span> <span>C</span><span>O</span><span>N</span><span>E</span><span>C</span><span>T</span><span>A</span></h1>
+    <p>Conectados en tiempos de cambio</p>
+    <div class="scroll-btn" onclick="document.getElementById('indice').scrollIntoView({behavior:'smooth'})">Explorar edición ↓</div>
   </section>
 
-  <section class="two-col art-block">
-    <div style="z-index: 1;">
-      <span class="kicker">Palabras del Liderazgo</span>
+  <section class="two-col">
+    <div>
       <h2>Editorial</h2>
-      <p>Un mensaje de esperanza y firmeza espiritual. Descubre cómo la fe nos permite ver lo invisible y alcanzar lo imposible en nuestra comunidad.</p>
+      <p>Mensaje del liderazgo sobre el enfoque espiritual del mes.</p>
     </div>
-    <div style="height: 400px; position: relative;">
-      <img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=800" class="img-magazine" alt="Editorial">
-    </div>
+    <div class="img-placeholder"></div>
   </section>
 
-  <section id="indice">
-    <span class="kicker">Contenido</span>
-    <h2>En esta edición</h2>
-    <div class="grid">
-      <div class="card">
+  <section id="indice" class="art-block">
+    <h2>Índice de la edición</h2>
+    <p style="max-width:70ch;margin-top:.75rem;color:#333;">Lo esencial está aquí mismo en el scroll. Cada tarjeta te deja ver lo importante y, si quieres profundizar, entras con <strong>Más</strong>.</p>
+    <div class="grid" style="margin-top:2.5rem;">
+      <div class="card art-card">
         <h3>Tema Central</h3>
-        <p>La certeza de lo que se espera.</p>
-        <a href="tema-central.html" class="btn primary">Saber más</a>
+        <p>Verso base, reflexión principal y aplicación práctica del mes.</p>
+        <a class="btn primary" href="#tema">Más</a>
       </div>
-      <div class="card">
-        <h3>Testimonios</h3>
-        <p>Vidas transformadas por el poder de Dios.</p>
-        <a href="testimonios.html" class="btn primary">Saber más</a>
+      <div class="card art-card">
+        <h3>Prédicas</h3>
+        <p>Síntesis semanal: verso base, puntos clave y foto del servicio.</p>
+        <a class="btn primary" href="#predicas">Más</a>
       </div>
-      <div class="card">
+      <div class="card art-card">
+        <h3>Testimonio</h3>
+        <p>Una historia real de fe y transformación para edificar.</p>
+        <a class="btn primary" href="#testimonio">Más</a>
+      </div>
+      <div class="card art-card">
+        <h3>Cultura & Sociedad</h3>
+        <p>Lectura del mundo con lente bíblico: contexto + verso relevante.</p>
+        <a class="btn primary" href="#cultura">Más</a>
+      </div>
+      <div class="card art-card">
         <h3>Comunidad</h3>
-        <p>Nuestros próximos pasos juntos.</p>
-        <a href="comunidad.html" class="btn primary">Saber más</a>
+        <p>Eventos, celebraciones, hitos y vida de iglesia.</p>
+        <a class="btn primary" href="#comunidad">Más</a>
+      </div>
+      <div class="card art-card">
+        <h3>Consejería</h3>
+        <p>Canal seguro para acompañamiento y apoyo pastoral.</p>
+        <a class="btn primary" href="#consejeria">Más</a>
       </div>
     </div>
   </section>
 
-  <section id="tema" class="full-bleed" style="background: var(--navy); color: white;">
+  <section id="tema" class="feature section-video snap">
+    <video autoplay muted loop playsinline>
+      <source src="https://cdn.coverr.co/videos/coverr-slow-clouds-1573/1080p.mp4" type="video/mp4" />
+    </video>
     <div class="motion-shape motion-blue"></div>
     <div class="motion-shape motion-sun"></div>
-    <div style="padding: 10vw; z-index: 1; position: relative; text-align: center;">
-      <h2 style="font-size: 4rem; color: var(--gold);">"La fe es la convicción de lo que no se ve."</h2>
-      <p style="margin-top: 2rem; font-style: italic;">Hebreos 11:1</p>
+    <div class="img-placeholder"></div>
+    <h2>Tema del Mes</h2>
+    <p><span class="kicker">Verso base</span><br/>Artículo principal con verso, reflexión y aplicación práctica. Aquí vive el mensaje que gobierna la edición.</p>
+  </section>
+
+  <section>
+    <h2>En el scroll</h2>
+    <p style="max-width:70ch;margin-top:.75rem;color:#333;">Estas secciones muestran lo fundamental aquí mismo.</p>
+
+    <div id="predicas" class="section-block art-block">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Prédicas del mes</div>
+          <div class="section-title">Un recorrido visual semana a semana</div>
+          <p class="section-desc">La enseñanza del mes narrada como línea de tiempo.</p>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="node"><span>Semana 1</span><p>Verso central · Dirección espiritual</p></div>
+        <div class="node"><span>Semana 2</span><p>Llamado · Respuesta · Comunidad</p></div>
+        <div class="node"><span>Semana 3</span><p>Transformación · Testimonio</p></div>
+        <div class="node"><span>Semana 4</span><p>Envío · Acción</p></div>
+      </div>
+      <div class="mini-grid">
+        <div class="mini"><strong>Semana 1</strong><span>Verso + 3 puntos clave</span></div>
+        <div class="mini"><strong>Semana 2</strong><span>Verso + 3 puntos clave</span></div>
+        <div class="mini"><strong>Semana 3</strong><span>Verso + 3 puntos clave</span></div>
+      </div>
+    </div>
+
+    <div id="testimonio" class="section-block art-block">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Testimonio</div>
+          <div class="section-title">Historias reales que edifican</div>
+          <p class="section-desc">Una historia breve, poderosa y humana.</p>
+          <a class="btn primary" href="#">Más (leer completo)</a>
+        </div>
+      </div>
+      <div class="mini-grid">
+        <div class="mini"><strong>Cita clave</strong><span>Una frase que resume la transformación</span></div>
+        <div class="mini"><strong>Momento</strong><span>El punto de quiebre / respuesta de fe</span></div>
+        <div class="mini"><strong>Aplicación</strong><span>Qué aprender y cómo vivirlo</span></div>
+      </div>
+    </div>
+
+    <div id="cultura" class="section-block art-block">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Cultura & sociedad</div>
+          <div class="section-title">Enterarme, discernir, responder</div>
+          <a class="btn primary" href="#">Más (ver artículo)</a>
+        </div>
+      </div>
+      <div class="mini-grid">
+        <div class="mini"><strong>Contexto</strong><span>Qué pasó y por qué importa</span></div>
+        <div class="mini"><strong>Verso</strong><span>Base bíblica para discernir</span></div>
+      </div>
+    </div>
+
+    <div id="comunidad" class="section-block art-block">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Comunidad</div>
+          <div class="section-title">Vida de iglesia</div>
+          <a class="btn primary" href="#">Más (ver álbum)</a>
+        </div>
+      </div>
+      <div class="mini-grid">
+        <div class="mini"><strong>Celebraciones</strong><span>Cumpleaños y logros</span></div>
+        <div class="mini"><strong>Eventos</strong><span>Fotos y highlights</span></div>
+      </div>
+    </div>
+
+    <div id="consejeria" class="section-block">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Consejería</div>
+          <div class="section-title">Acompañamiento</div>
+          <a class="btn primary" href="#">Más (solicitar)</a>
+        </div>
+      </div>
+      <div class="mini-grid">
+        <div class="mini"><strong>Oración</strong><span>Solicitud breve y confidencial</span></div>
+        <div class="mini"><strong>Cita</strong><span>Agenda un acompañamiento</span></div>
+      </div>
     </div>
   </section>
 
-  <footer style="background: #111; color: white; padding: 5rem 10vw; text-align: center;">
-    <p>Hebreos 11 Conecta · 2026</p>
-    <p style="font-size: 0.8rem; color: var(--gray); margin-top: 1rem;">Diseñado para edificar y conectar a la iglesia.</p>
+  <section class="feature full-bleed parallax" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1800&q=80')">
+    <div class="img-placeholder"></div>
+    <div class="verse-overlay">"La fe es la certeza de lo que se espera"</div>
+    <p style="color: white; padding: 2rem;">Una página–pausa visual con verso y fotografía a sangre.</p>
+  </section>
+
+  <section class="cta">
+    <div>
+      <h2>Enviar</h2>
+      <p>Envía tu testimonio, solicita consejería o únete al evangelismo.</p>
+      <button>Enviar información</button>
+    </div>
+    <div class="img-placeholder"></div>
+  </section>
+
+  <footer>
+    <p>Hebreos 11 Conecta · Revista Digital · 2026</p>
   </footer>
-
-  <script>
-    // Sistema de paso de página (Scroll Snap Smooth)
-    let isScrolling = false;
-    window.addEventListener('wheel', e => {
-      if (window.innerWidth < 900) return;
-      if (isScrolling) return;
-      
-      const dir = e.deltaY > 0 ? 1 : -1;
-      const sections = [...document.querySelectorAll('section')];
-      const currentIdx = sections.findIndex(s => {
-        const rect = s.getBoundingClientRect();
-        return rect.top >= -100 && rect.top <= 100;
-      });
-
-      const target = sections[currentIdx + dir];
-      if (target) {
-        isScrolling = true;
-        target.scrollIntoView({ behavior: 'smooth' });
-        setTimeout(() => { isScrolling = false; }, 1000);
-      }
-    }, { passive: false });
-  </script>
 
 </body>
 </html>

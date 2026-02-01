@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Directorio de Talentos – Hebreos 11</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+  <style>
+    :root { --navy:#014574; --gold:#EBC45D; --white:#F6F1EB; --gray:#eee; }
+    * { box-sizing: border-box; font-family: 'Inter', sans-serif; margin: 0; padding: 0; }
+    body { background: var(--white); color: #333; }
+
+    header { background: var(--navy); color: white; padding: 4rem 5%; text-align: center; }
+    h1 { font-family: 'Georgia', serif; font-size: 2.5rem; margin-bottom: 1rem; }
+    .back-btn { color: var(--gold); text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 0.8rem; }
+
+    /* CONTENEDOR DE CONTROLES (BUSCADOR + BOTONES) */
+    .controls { max-width: 800px; margin: -2.5rem auto 2rem; padding: 0 1rem; text-align: center; position: relative; z-index: 10; }
+
+    /* ESTILO DEL BUSCADOR */
+    .search-wrapper { margin-bottom: 1.5rem; }
+    #searchInput {
+      width: 100%;
+      max-width: 500px;
+      padding: 1rem 1.5rem;
+      border-radius: 50px;
+      border: none;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      font-size: 1rem;
+      outline: none;
+      border: 2px solid transparent;
+      transition: 0.3s;
+    }
+    #searchInput:focus { border-color: var(--gold); transform: scale(1.02); }
+    
+    /* ESTILO DE BOTONES */
+    .filter-btn {
+      background: white; border: none; padding: 0.6rem 1.2rem; 
+      margin: 0.3rem; border-radius: 50px; cursor: pointer; 
+      font-weight: bold; color: var(--navy); box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      transition: 0.3s; font-size: 0.9rem;
+    }
+    .filter-btn:hover, .filter-btn.active { background: var(--gold); color: var(--navy); transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
+
+    /* GRID */
+    .directory-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem; max-width: 1100px; margin: 0 auto 5rem; padding: 0 1.5rem;
+    }
+
+    .talent-card {
+      background: white; border-radius: 15px; overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05); transition: 0.3s;
+      border-top: 5px solid var(--navy); display: flex; flex-direction: column;
+    }
+    .talent-card:hover { transform: translateY(-5px); }
+
+    .card-header { padding: 1.5rem; text-align: center; }
+    .avatar { 
+      width: 80px; height: 80px; border-radius: 50%; object-fit: cover; 
+      margin: 0 auto 1rem; background: #ddd; border: 3px solid var(--gold);
+    }
+    .profession { 
+      background: #eef4fa; color: var(--navy); padding: 0.3rem 0.8rem; 
+      border-radius: 4px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase;
+    }
+
+    .card-body { padding: 0 1.5rem 1.5rem; text-align: center; flex-grow: 1; }
+    h3 { margin: 0.5rem 0; color: #222; }
+    .category-tag { font-size: 0.8rem; color: #777; font-style: italic; }
+
+    .whatsapp-btn {
+      display: block; width: 100%; padding: 1rem;
+      background: #25D366; color: white; text-decoration: none;
+      text-align: center; font-weight: bold; margin-top: auto;
+      transition: 0.3s;
+    }
+    .whatsapp-btn:hover { background: #128C7E; }
+
+    #loader { text-align: center; padding: 2rem; color: var(--navy); }
+    .no-results { text-align: center; width: 100%; grid-column: 1 / -1; padding: 2rem; color: #666; display: none; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="back-btn">◀ Volver a la Portada</a>
+    <h1>Directorio de Talentos</h1>
+    <p>Busca por nombre, profesión o filtra por categoría.</p>
+  </header>
+
+  <div class="controls">
+    <div class="search-wrapper">
+      <input type="text" id="searchInput" placeholder="🔍 Buscar por nombre o profesión (ej: Juan, Plomero)..." onkeyup="applyFilters()">
+    </div>
+
+    <div id="btnContainer">
+      <button class="filter-btn active" onclick="setCategory('all', this)">Todos</button>
+      <button class="filter-btn" onclick="setCategory('Hogar', this)">Hogar</button>
+      <button class="filter-btn" onclick="setCategory('Salud', this)">Salud</button>
+      <button class="filter-btn" onclick="setCategory('Servicios', this)">Servicios</button>
+      <button class="filter-btn" onclick="setCategory('Alimentos', this)">Alimentos</button>
+    </div>
+  </div>
+
+  <div id="loader">Cargando talentos...</div>
+  
+  <div id="grid" class="directory-grid">
+    </div>
+  <div id="noResults" class="no-results">No encontramos coincidencias para tu búsqueda.</div>
+
+  <script>
+    // ==========================================
+    // ⚠️ RECUERDA PEGAR TU LINK CSV AQUÍ ABAJO
+    // ==========================================
+    const googleSheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTseyKCujETDIdNc-9RVfVRSHQBvmezwAEokvonUDPqYrQDsJeZEaBB5lu72zi9qLguQ9YY2joNxKn6/pub?gid=901159867&single=true&output=csv"; 
+
+    let allTalents = [];
+    let currentCategory = 'all';
+
+    function init() {
+      Papa.parse(googleSheetURL, {
+        download: true,
+        header: true, 
+        complete: function(results) {
+          allTalents = results.data;
+          document.getElementById('loader').style.display = 'none';
+          applyFilters(); // Mostrar todo al inicio
+        }
+      });
+    }
+
+    // 1. Función para seleccionar categoría
+    function setCategory(category, btnElement) {
+      currentCategory = category;
+      
+      // Actualizar estilo visual de los botones
+      const buttons = document.querySelectorAll('.filter-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      btnElement.classList.add('active');
+
+      // Aplicar filtros
+      applyFilters();
+    }
+
+    // 2. Función Maestra de Filtrado (Busca texto + Categoría)
+    function applyFilters() {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+      const grid = document.getElementById('grid');
+      const noResults = document.getElementById('noResults');
+      
+      grid.innerHTML = ""; // Limpiar grid
+      let visibleCount = 0;
+
+      allTalents.forEach(item => {
+        if(!item.Nombre) return; // Saltar filas vacías
+
+        // Filtro 1: ¿Coincide la categoría?
+        const matchCategory = currentCategory === 'all' || (item.Categoria && item.Categoria.includes(currentCategory));
+
+        // Filtro 2: ¿Coincide el texto (Nombre o Profesión)?
+        const textData = (item.Nombre + " " + item.Profesion).toLowerCase();
+        const matchSearch = textData.includes(searchTerm);
+
+        // Si CUMPLE AMBOS, mostrar
+        if(matchCategory && matchSearch) {
+          visibleCount++;
+          const imageSrc = item.Foto && item.Foto.length > 5 ? item.Foto : 'https://via.placeholder.com/150?text=Talento';
+
+          const card = `
+            <div class="talent-card">
+              <div class="card-header">
+                <img src="${imageSrc}" class="avatar" alt="${item.Nombre}">
+                <span class="profession">${item.Profesion}</span>
+              </div>
+              <div class="card-body">
+                <h3>${item.Nombre}</h3>
+                <p class="category-tag">${item.Categoria}</p>
+              </div>
+              <a href="https://wa.me/${item.Telefono}?text=Hola ${item.Nombre}, te vi en el directorio de Hebreos 11." target="_blank" class="whatsapp-btn">
+                Contactar WhatsApp
+              </a>
+            </div>
+          `;
+          grid.innerHTML += card;
+        }
+      });
+
+      // Mostrar mensaje si nadie cumple los requisitos
+      if(visibleCount === 0) {
+        noResults.style.display = "block";
+      } else {
+        noResults.style.display = "none";
+      }
+    }
+
+    init();
+  </script>
+
+</body>
+</html>

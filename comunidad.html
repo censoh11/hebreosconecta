@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comunidad – Hebreos 11 Conecta</title>
+  <style>
+    :root {
+      --navy:#014574; --gold:#EBC45D; --white:#F6F1EB;
+      --accent-rose: #d38cab; --accent-teal: #2fa4a9;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+    body { background-color: var(--white); color: #111; line-height: 1.6; overflow-x: hidden; }
+
+    /* HEADER TIPO REVISTA MODA */
+    header {
+      padding: 8rem 10vw 4rem;
+      text-align: left;
+      border-bottom: 2px solid var(--navy);
+      background: white;
+    }
+    .kicker { font-weight: 800; text-transform: uppercase; letter-spacing: 5px; color: var(--gold); font-size: 0.8rem; }
+    h1 { font-family: 'Georgia', serif; font-size: clamp(3rem, 10vw, 8rem); line-height: 0.9; margin: 1rem 0; color: var(--navy); }
+
+    .container { max-width: 1300px; margin: 0 auto; padding: 4rem 2rem; }
+
+    /* GRID EDITORIAL ASIMÉTRICO */
+    .magazine-layout {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 2rem;
+    }
+
+    /* 1. CUMPLEAÑOS: ESTILO "CALENDARIO CHIC" */
+    .sec-birthdays { grid-column: span 4; background: var(--navy); color: white; padding: 3rem; border-radius: 0 50px 0 50px; }
+    .sec-birthdays h2 { font-family: Georgia; font-size: 2.5rem; margin-bottom: 2rem; border-bottom: 1px solid var(--gold); }
+    .b-item { display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 1.1rem; }
+    .b-item span { color: var(--gold); font-weight: bold; }
+
+    /* 2. MARRIED TO BE: ESTILO ROMÁNTICO MODERNO */
+    .sec-wedding { grid-column: span 8; position: relative; background: #fff; padding: 2rem; border: 1px solid #ddd; display: flex; gap: 2rem; align-items: center; }
+    .wedding-frame { width: 40%; height: 300px; background: #ddd; position: relative; overflow: hidden; }
+    .wedding-frame img { width: 100%; height: 100%; object-fit: cover; }
+    .wedding-info { width: 60%; }
+    .wedding-info h2 { font-family: Georgia; font-size: 3rem; color: var(--accent-rose); }
+
+    /* 3. GLORIA A DIOS: ESTILO TESTIMONIO IMPACTANTE */
+    .sec-gloria { grid-column: span 7; background: var(--gold); padding: 4rem; position: relative; }
+    .sec-gloria::after { content: "!"; position: absolute; right: 20px; top: -20px; font-size: 15rem; opacity: 0.1; font-weight: 900; }
+    .gloria-content { display: flex; align-items: center; gap: 2rem; }
+    .gloria-img { width: 200px; height: 200px; border-radius: 50%; border: 10px solid white; object-fit: cover; }
+
+    /* 4. EMPRENDEDOR DEL MES: ESTILO "FORBES" */
+    .sec-entrepreneur { grid-column: span 5; background: #111; color: white; padding: 3rem; display: flex; flex-direction: column; justify-content: center; }
+    .sec-entrepreneur .badge { background: var(--accent-teal); padding: 0.5rem 1rem; display: inline-block; font-size: 0.7rem; margin-bottom: 1rem; font-weight: bold; }
+
+    /* 5. SOLTERO DEL MES: ESTILO "LIFESTYLE" */
+    .sec-single { grid-column: span 6; background: white; padding: 2rem; border: 10px solid var(--white); text-align: center; }
+    .single-img { width: 100%; height: 400px; object-fit: cover; filter: grayscale(100%); transition: 0.5s; }
+    .single-img:hover { filter: grayscale(0%); }
+
+    /* 6. NOTA LUCTUOSA: ESTILO MINIMALISTA SOLEMNE */
+    .sec-luto { grid-column: span 6; display: flex; align-items: center; justify-content: center; background: #f0f0f0; padding: 3rem; border-left: 15px solid #333; }
+
+    @media (max-width: 900px) {
+      .magazine-layout > div { grid-column: span 12 !important; }
+      .sec-wedding { flex-direction: column; }
+      .wedding-frame, .wedding-info { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" style="text-decoration:none; color:inherit;">
+        <span class="kicker">Hebreos 11 Conecta</span>
+        <h1>VIDA &<br>COMUNIDAD.</h1>
+    </a>
+  </header>
+
+  <div class="container">
+    <div class="magazine-layout">
+
+      <div class="sec-birthdays">
+        <h2>Celebrando la Vida</h2>
+        <div class="b-item">Raquel Martínez <span>Feb 04</span></div>
+        <div class="b-item">Samuel Estévez <span>Feb 09</span></div>
+        <div class="b-item">David Novas <span>Feb 15</span></div>
+        <div class="b-item">Ruth de la Rosa <span>Feb 22</span></div>
+        <div class="b-item">Isaac Jiménez <span>Feb 28</span></div>
+      </div>
+
+      <div class="sec-wedding">
+        <div class="wedding-frame">
+          <img src="https://images.unsplash.com/photo-1522673607200-16488352435b?auto=format&fit=crop&w=800" alt="Novios">
+        </div>
+        <div class="wedding-info">
+          <span class="kicker" style="color:var(--accent-rose)">Married to be</span>
+          <h2>Marcos & Ana</h2>
+          <p>La cuenta regresiva ha comenzado. Acompáñanos a orar por esta nueva unión que nace bajo el propósito divino.</p>
+        </div>
+      </div>
+
+      <div class="sec-gloria">
+        <span class="kicker" style="color:var(--navy)">Gloria a Dios</span>
+        <div class="gloria-content">
+          <img src="https://images.unsplash.com/photo-1549413182-073017096c1e?auto=format&fit=crop&w=400" class="gloria-img" alt="Francisco">
+          <div>
+            <h2 style="font-family:Georgia; font-size:2.5rem;">¡Francisco estrena!</h2>
+            <p>Celebramos con alegría la provisión del Señor: una nueva herramienta de transporte para su familia.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-entrepreneur">
+        <span class="badge">NEGOCIOS CON REINO</span>
+        <h2 style="font-family:Georgia; font-size:2rem; margin-bottom:1rem;">Pastelería "Sión"</h2>
+        <p>Este mes destacamos a <strong>Marta Díaz</strong>, quien ha puesto sus dones de repostería al servicio del Señor. ¡Apoyemos lo nuestro!</p>
+        <a href="#" style="color:var(--gold); margin-top:1.5rem; text-decoration:none; font-weight:bold;">Conocer más →</a>
+      </div>
+
+      <div class="sec-single">
+        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800" class="single-img" alt="Soltero">
+        <div style="padding:1.5rem;">
+          <span class="kicker">Perfil del Mes</span>
+          <h2 style="font-family:Georgia;">José Eduardo</h2>
+          <p>Apasionado por la alabanza, el café y el servicio. Un corazón dispuesto para lo que Dios mande.</p>
+        </div>
+      </div>
+
+      <div class="sec-luto">
+        <div style="text-align:center;">
+          <h2 style="font-family:Georgia; font-size:2rem; margin-bottom:1rem;">Nota de Pesar</h2>
+          <p>Abrazamos en fe a la familia <strong>Reyes Mendoza</strong>. La esperanza del cielo es nuestro mayor consuelo.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer style="padding: 5rem; text-align:center; background: var(--navy); color: white;">
+    HEBREOS 11 CONECTA · EDICIÓN FEBRERO 2026
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iglesia Asociada</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+  <style>
+    :root { --brand-blue: #002447; --brand-gold: #F7A900; --white: #fff; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Open Sans', sans-serif; }
+    body { background: #f9f9f9; color: #333; }
+    
+    /* HEADER SIMPLE */
+    header { background: var(--brand-blue); padding: 1.5rem 5%; text-align: center; color: white; }
+    .back-link { color: var(--brand-gold); text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 0.8rem; }
+    
+    /* CONTENIDO */
+    .container { max-width: 900px; margin: 3rem auto; padding: 0 1.5rem; }
+    
+    .church-header { text-align: center; margin-bottom: 3rem; }
+    h1 { font-family: 'Montserrat', sans-serif; font-size: 3rem; color: var(--brand-blue); line-height: 1; }
+    .pastor-name { color: var(--brand-gold); font-weight: bold; text-transform: uppercase; letter-spacing: 2px; margin-top: 1rem; display: block; }
+    
+    .info-card {
+      background: white; border-radius: 15px; overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08); display: grid; grid-template-columns: 1fr 1fr;
+    }
+    
+    .map-container iframe { width: 100%; height: 100%; min-height: 400px; border: 0; }
+    
+    .details { padding: 3rem; display: flex; flex-direction: column; justify-content: center; }
+    .detail-item { margin-bottom: 2rem; }
+    .detail-item h4 { font-family: 'Montserrat', sans-serif; font-size: 1.2rem; color: var(--brand-blue); margin-bottom: 0.5rem; }
+    .detail-item p { font-size: 1.1rem; color: #555; }
+    .detail-item i { color: var(--brand-gold); width: 25px; }
+
+    /* REDES SOCIALES */
+    .socials { margin-top: 2rem; border-top: 1px solid #eee; padding-top: 2rem; }
+    .socials a { margin-right: 15px; color: #999; font-size: 1.5rem; transition: 0.3s; }
+    .socials a:hover { color: var(--brand-blue); }
+
+    /* PANTALLA DE ERROR */
+    #error-msg { text-align: center; padding: 5rem; display: none; }
+
+    @media (max-width: 768px) { .info-card { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="iglesia.html#partners" class="back-link">◀ Volver a Iglesia Hebreos 11</a>
+  </header>
+
+  <div id="content" class="container">
+    <div class="church-header">
+      <h1 id="c-name">Cargando...</h1>
+      <span id="c-pastor" class="pastor-name">...</span>
+    </div>
+
+    <div class="info-card">
+      <div class="details">
+        <div class="detail-item">
+          <h4><i class="fas fa-calendar-alt"></i> Horarios de Culto</h4>
+          <p id="c-schedule">...</p>
+        </div>
+        <div class="detail-item">
+          <h4><i class="fas fa-map-marker-alt"></i> Dirección</h4>
+          <p id="c-address">...</p>
+        </div>
+        <div class="detail-item">
+          <h4><i class="fas fa-phone"></i> Contacto</h4>
+          <p id="c-phone">...</p>
+        </div>
+        
+        <div class="socials">
+          <a href="#" id="link-fb"><i class="fab fa-facebook"></i></a>
+          <a href="#" id="link-ig"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      
+      <div class="map-container">
+        <iframe id="c-map" src="" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div id="error-msg">
+    <h2>Iglesia no encontrada</h2>
+    <p>Parece que el enlace está roto o la iglesia no existe.</p>
+    <a href="iglesia.html" style="color:var(--brand-blue);">Volver al inicio</a>
+  </div>
+
+  <script>
+    // ===============================================
+    // BASE DE DATOS DE IGLESIAS ASOCIADAS
+    // ===============================================
+    const iglesias = {
+      
+      // ID: 'alfarero' (debe coincidir con el link en iglesia.html)
+      'alfarero': {
+        nombre: "Casa del Alfarero",
+        pastor: "Pastor Carlos Martínez",
+        horarios: "Domingos 9:00 AM y Miércoles 7:30 PM",
+        direccion: "Av. Independencia #50, Santo Domingo",
+        telefono: "(809) 123-4567",
+        facebook: "https://facebook.com",
+        instagram: "https://instagram.com",
+        // Pega el link 'embed' de Google Maps aquí:
+        mapa: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3784.576189158334!2d-69.9143666851082!3d18.457375987445763!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8eaf326555555555%3A0x5555555555555555!2sSanto%20Domingo!5e0!3m2!1ses!2sdo!4v1614000000000"
+      },
+
+      'shalom': {
+        nombre: "Ministerio Shalom",
+        pastor: "Pastora Ana López",
+        horarios: "Domingos 10:00 AM y Viernes 8:00 PM",
+        direccion: "Calle Sol #23, Santiago",
+        telefono: "(809) 987-6543",
+        facebook: "#",
+        instagram: "#",
+        mapa: "https://www.google.com/maps/embed?pb=..." // Poner mapa real
+      },
+
+      'red': {
+        nombre: "Red Apostólica Global",
+        pastor: "Apóstol Pedro Ramírez",
+        horarios: "Sábados 7:00 PM",
+        direccion: "Zona Oriental, Santo Domingo Este",
+        telefono: "(809) 555-0000",
+        facebook: "#",
+        instagram: "#",
+        mapa: "https://www.google.com/maps/embed?pb=..." 
+      },
+
+      'zion': {
+        nombre: "Monte de Sion",
+        pastor: "Pastor David Ruiz",
+        horarios: "Domingos 11:00 AM",
+        direccion: "Los Alcarrizos, Calle 8",
+        telefono: "(829) 000-0000",
+        facebook: "#",
+        instagram: "#",
+        mapa: "https://www.google.com/maps/embed?pb=..." 
+      }
+    };
+
+    // LÓGICA PARA CARGAR LOS DATOS
+    function cargarIglesia() {
+      // 1. Obtener el ID de la URL (ej: ?id=alfarero)
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+
+      // 2. Buscar en la base de datos
+      const info = iglesias[id];
+
+      if (info) {
+        // 3. Rellenar el HTML
+        document.getElementById('c-name').textContent = info.nombre;
+        document.getElementById('c-pastor').textContent = info.pastor;
+        document.getElementById('c-schedule').textContent = info.horarios;
+        document.getElementById('c-address').textContent = info.direccion;
+        document.getElementById('c-phone').textContent = info.telefono;
+        document.getElementById('c-map').src = info.mapa;
+        
+        document.getElementById('link-fb').href = info.facebook;
+        document.getElementById('link-ig').href = info.instagram;
+
+        // Actualizar Título de la pestaña
+        document.title = info.nombre + " - Asociada";
+      } else {
+        // Si no existe, mostrar error
+        document.getElementById('content').style.display = 'none';
+        document.getElementById('error-msg').style.display = 'block';
+      }
+    }
+
+    // Ejecutar al cargar
+    cargarIglesia();
+  </script>
+
+</body>
+</html>

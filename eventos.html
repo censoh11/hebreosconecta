@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Actividades – Hebreos 11 Conecta</title>
+  <style>
+    :root {
+      --navy:#014574; --gold:#EBC45D; --white:#F6F1EB;
+      --gray:#eee; --dark:#222;
+    }
+    * { box-sizing: border-box; font-family: 'Inter', sans-serif; margin: 0; padding: 0; }
+    body { background: var(--white); color: #333; }
+
+    /* HEADER */
+    header {
+      background: var(--navy); color: white; padding: 6rem 5% 4rem; text-align: center;
+    }
+    .back-btn { color: var(--gold); text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 0.8rem; }
+    h1 { font-family: 'Georgia', serif; font-size: 3rem; margin: 1rem 0; }
+
+    /* PESTAÑAS (TABS) */
+    .tabs-container {
+      max-width: 600px; margin: -2rem auto 3rem; 
+      background: white; border-radius: 50px; padding: 0.5rem;
+      display: flex; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      position: relative; z-index: 10;
+    }
+    
+    .tab {
+      flex: 1; border: none; background: none; padding: 1rem;
+      border-radius: 40px; cursor: pointer; font-weight: 800;
+      text-transform: uppercase; font-size: 0.9rem; color: #888;
+      transition: 0.3s;
+    }
+    
+    .tab.active { background: var(--gold); color: var(--navy); box-shadow: 0 4px 10px rgba(235, 196, 93, 0.4); }
+
+    /* CONTENEDOR PRINCIPAL */
+    .content-area { max-width: 1000px; margin: 0 auto 5rem; padding: 0 1.5rem; display: none; animation: fadeIn 0.5s; }
+    .content-area.active-content { display: grid; }
+    
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* --- ESTILOS "LO NEXT" (AGENDA MENSUAL) --- */
+    .agenda-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; width: 100%; }
+    
+    .event-card {
+      background: white; border-radius: 20px; overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05); border-bottom: 5px solid var(--navy);
+      display: flex; flex-direction: column;
+    }
+    
+    .event-flyer {
+      width: 100%; height: auto; max-height: 350px; 
+      object-fit: cover; object-position: top; display: block;
+    }
+
+    .date-box {
+      background: var(--navy); color: white; padding: 0.8rem 1.5rem; 
+      text-align: center; font-weight: bold; width: 100%;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .date-big { font-size: 1.3rem; color: var(--gold); text-transform: uppercase;}
+    
+    .event-body { padding: 1.5rem; }
+    .event-body h3 { font-family: Georgia, serif; font-size: 1.6rem; margin-bottom: 0.5rem; color: #111; }
+    .event-info { color: #666; font-size: 0.9rem; margin-bottom: 1.2rem; display: flex; flex-wrap: wrap; gap: 1rem; }
+    .event-info span { background: #f4f4f4; padding: 0.2rem 0.6rem; border-radius: 4px; }
+    
+    .btn-register {
+      display: block; text-align: center; width: 100%; padding: 0.8rem; background: var(--gold); 
+      color: var(--navy); text-decoration: none; border-radius: 8px; 
+      font-weight: bold; text-transform: uppercase; font-size: 0.9rem;
+      transition: 0.3s;
+    }
+    .btn-register:hover { background: #dcb348; }
+
+    /* --- ESTILOS "LO PAST" (GALERÍA) --- */
+    .past-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; width: 100%; }
+    .memory-card { position: relative; border-radius: 15px; overflow: hidden; height: 300px; cursor: pointer; }
+    .memory-img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+    .memory-card:hover .memory-img { transform: scale(1.1); }
+    .memory-overlay {
+      position: absolute; bottom: 0; left: 0; width: 100%;
+      background: linear-gradient(transparent, black);
+      padding: 2rem 1.5rem 1.5rem; color: white;
+    }
+
+    /* --- NUEVO ESTILO: PROYECCIÓN ANUAL (GRILLA CON FECHAS) --- */
+    .yearly-section {
+      background: #fdfdfd; padding: 4rem 1.5rem; margin-top: 3rem; border-top: 1px solid #ddd;
+    }
+    .year-title {
+      font-family: Georgia, serif; font-size: 2.2rem; color: var(--navy);
+      text-align: center; margin-bottom: 3rem; position: relative;
+    }
+    .year-title::after {
+      content: ""; display: block; width: 60px; height: 3px; 
+      background: var(--gold); margin: 0.5rem auto;
+    }
+
+    .year-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem; max-width: 1200px; margin: 0 auto;
+    }
+
+    .month-planner {
+      background: white; border: 1px solid #eaeaea; border-radius: 16px;
+      overflow: hidden; transition: 0.3s;
+    }
+    .month-planner:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-color: var(--gold); }
+
+    .planner-header {
+      background: var(--navy); color: white; padding: 0.8rem;
+      text-align: center; font-family: Georgia, serif; font-size: 1.1rem; letter-spacing: 1px;
+    }
+
+    /* Tabla interna del mes */
+    .planner-row {
+      display: grid; grid-template-columns: 60px 1fr; /* 60px para fecha, resto para evento */
+      border-bottom: 1px solid #f4f4f4;
+    }
+    .planner-row:last-child { border-bottom: none; }
+
+    .col-date {
+      padding: 0.8rem 0.5rem; text-align: center;
+      background: #fcfcfc; color: var(--gold); font-weight: 800; font-size: 0.85rem;
+      border-right: 1px solid #f4f4f4; display: flex; align-items: center; justify-content: center;
+    }
+    .col-event {
+      padding: 0.8rem; font-size: 0.85rem; color: #444; display: flex; align-items: center;
+      line-height: 1.3;
+    }
+    .col-event strong { display: block; width: 100%; color: var(--navy); }
+
+    footer { text-align: center; padding: 4rem; color: #888; font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="back-btn">◀ Volver a la Portada</a>
+    <h1>Agenda Mensual</h1>
+    <p>Conéctate con lo que viene y revive lo que pasó.</p>
+  </header>
+
+  <div class="tabs-container">
+    <button class="tab active" onclick="openTab('next')">Lo Next (Próximo)</button>
+    <button class="tab" onclick="openTab('past')">Lo Past (Memorias)</button>
+  </div>
+
+  <div id="next" class="content-area agenda-grid active-content">
+    
+    <article class="event-card">
+      <img src="https://images.unsplash.com/photo-1514525253440-b393452e3383?auto=format&fit=crop&w=800" class="event-flyer" alt="Flyer Cena">
+      <div class="date-box">
+        <span>SÁBADO</span>
+        <span class="date-big">14 FEB</span>
+      </div>
+      <div class="event-body">
+        <h3>Cena de Parejas</h3>
+        <div class="event-info">
+          <span>🕒 7:00 PM</span>
+          <span>📍 Salón Principal</span>
+        </div>
+        <p style="margin-bottom: 1.5rem;">Una noche romántica e inolvidable. Cupo limitado.</p>
+        <a href="#" class="btn-register">Reservar Lugar</a>
+      </div>
+    </article>
+
+    <article class="event-card">
+      <div class="date-box">
+        <span>DOMINGO</span>
+        <span class="date-big">22 FEB</span>
+      </div>
+      <div class="event-body">
+        <h3>Domingo de Misiones</h3>
+        <div class="event-info">
+          <span>🕒 10:00 AM</span>
+          <span>📍 Auditorio</span>
+        </div>
+        <p style="margin-bottom: 1.5rem;">Oremos juntos por las naciones.</p>
+        <a href="#" class="btn-register">Ver más detalles</a>
+      </div>
+    </article>
+
+  </div>
+
+  <div id="past" class="content-area past-grid">
+    <div class="memory-card">
+      <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=800" class="memory-img" alt="Ayuno">
+      <div class="memory-overlay">
+        <h3>Ayuno de Primicias</h3>
+        <p>Enero 2026</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="yearly-section">
+    <h2 class="year-title">Proyección Anual 2026</h2>
+    
+    <div class="year-grid">
+      
+      <div class="month-planner">
+        <div class="planner-header">Enero</div>
+        <div class="planner-row">
+          <div class="col-date">01-07</div>
+          <div class="col-event">Semana de Primicias</div>
+        </div>
+        <div class="planner-row">
+          <div class="col-date">25</div>
+          <div class="col-event">Lanzamiento Visión</div>
+        </div>
+      </div>
+
+      <div class="month-planner">
+        <div class="planner-header">Febrero</div>
+        <div class="planner-row">
+          <div class="col-date">14</div>
+          <div class="col-event">Cena de Parejas</div>
+        </div>
+        <div class="planner-row">
+          <div class="col-date">28</div>
+          <div class="col-event">Vigilia Unida</div>
+        </div>
+      </div>
+
+      <div class="month-planner">
+        <div class="planner-header">Marzo</div>
+        <div class="planner-row">
+          <div class="col-date">15</div>
+          <div class="col-event">Tarde de Talentos</div>
+        </div>
+        <div class="planner-row">
+          <div class="col-date">29</div>
+          <div class="col-event">Evangelismo Urbano</div>
+        </div>
+      </div>
+
+      <div class="month-planner">
+        <div class="planner-header">Abril</div>
+        <div class="planner-row">
+          <div class="col-date">14-16</div>
+          <div class="col-event"><strong>Semana Santa</strong>Actividades Especiales</div>
+        </div>
+        <div class="planner-row">
+          <div class="col-date">19</div>
+          <div class="col-event">Domingo de Resurrección</div>
+        </div>
+      </div>
+      
+      <div class="month-planner">
+        <div class="planner-header">Mayo</div>
+        <div class="planner-row">
+          <div class="col-date">30</div>
+          <div class="col-event">Congreso de Mujeres</div>
+        </div>
+      </div>
+
+      <div class="month-planner">
+        <div class="planner-header">Junio</div>
+        <div class="planner-row">
+          <div class="col-date">15</div>
+          <div class="col-event">Día de la Familia</div>
+        </div>
+        <div class="planner-row">
+          <div class="col-date">26-28</div>
+          <div class="col-event"><strong>Retiro de Hombres</strong>Monte de Oración</div>
+        </div>
+      </div>
+
+      </div>
+    
+    <p style="text-align:center; margin-top:2rem; font-size:0.8rem; color:#888;">* Fechas sujetas a cambios bajo dirección pastoral.</p>
+  </section>
+
+  <footer>
+    Hebreos 11 Conecta · Agenda Mensual
+  </footer>
+
+  <script>
+    function openTab(tabName) {
+      const contents = document.querySelectorAll('.content-area');
+      contents.forEach(content => content.classList.remove('active-content'));
+
+      const tabs = document.querySelectorAll('.tab');
+      tabs.forEach(tab => tab.classList.remove('active'));
+
+      document.getElementById(tabName).classList.add('active-content');
+      
+      const clickedBtn = Array.from(tabs).find(t => t.innerText.includes(tabName === 'next' ? 'Next' : 'Past'));
+      if(clickedBtn) clickedBtn.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>

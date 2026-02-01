@@ -39,52 +39,68 @@
     /* =========================================
        4. MENÚ FLOTANTE INTELIGENTE (ACTUALIZADO)
        ========================================= */
-    .floating-index {
+.floating-index {
       position: fixed;
       top: 50%;
       right: 0;
-      transform: translateY(-50%) translateX(85%); /* Oculto inicialmente */
+      /* Ajustado a 78% para que la pestaña dorada se vea claramente */
+      transform: translateY(-50%) translateX(78%); 
       display: flex;
       flex-direction: column;
       gap: .75rem;
-      z-index: 99;
+      z-index: 999; /* Mayor prioridad para que nada lo tape */
       background: var(--navy);
-      padding: 2rem 1rem;
+      padding: 2rem 1.2rem 2rem 2.5rem; /* Más espacio a la izquierda para la palabra */
       border-radius: 30px 0 0 30px;
-      transition: transform 0.4s ease-in-out;
-      box-shadow: -5px 0 20px rgba(0,0,0,0.2);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: -10px 0 30px rgba(0,0,0,0.3);
+      cursor: pointer;
     }
 
+    /* Se despliega al pasar el mouse (Desktop) */
     .floating-index:hover {
-      transform: translateY(-50%) translateX(0); /* Se desliza al pasar el mouse */
+      transform: translateY(-50%) translateX(0);
     }
 
+    /* Pestaña dorada con la palabra MENÚ */
     .floating-index::before {
-      content: "MENU ◀";
+      content: "MENÚ ◀";
       position: absolute;
-      left: 5px;
+      left: 8px; /* Posición de la palabra en la pestaña */
       top: 50%;
       transform: translateY(-50%) rotate(-90deg);
-      font-size: 0.6rem;
+      font-size: 0.75rem;
       color: var(--gold);
       font-weight: bold;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
+      white-space: nowrap;
     }
 
     .floating-index a {
       text-decoration: none;
       color: white;
       background: rgba(255, 255, 255, 0.1);
-      padding: .6rem 1rem;
+      padding: .6rem 1.2rem;
       border-radius: 999px;
       font-size: .75rem;
-      letter-spacing: .12em;
       text-transform: uppercase;
-      transition: all 0.3s ease;
+      transition: 0.3s;
       white-space: nowrap;
+      display: block;
     }
 
-    .floating-index a:hover { background: var(--gold); color: var(--navy); }
+    .floating-index a:hover { 
+      background: var(--gold); 
+      color: var(--navy); 
+    }
+
+    /* Ajuste para móviles: Que se vea un poco más para poder tocarlo con el dedo */
+    @media(max-width: 900px){
+      .floating-index {
+        transform: translateY(-50%) translateX(82%);
+        padding: 1.5rem 0.8rem 1.5rem 2rem;
+      }
+    }
 
     /* =========================================
        5. HERO Y ANIMACIONES
@@ -381,3 +397,4 @@ window.addEventListener('wheel',e=>{
 
 </body>
 </html>
+

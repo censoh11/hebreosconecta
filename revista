@@ -30,41 +30,17 @@
     h1,h2{letter-spacing:0.04em;font-family:Georgia,serif;}
     h3{font-family:Georgia,serif;}
 
-    /* IMAGES STYLING */
-    img {
-      max-width: 100%;
-      display: block;
-      object-fit: cover;
-      transition: transform 0.4s ease;
-    }
-
-    .img-magazine {
-      width: 100%;
-      height: 100%;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    }
-
-    /* MOSAIC GALLERY */
-    .mosaic-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: repeat(2, 150px);
-      gap: 10px;
-      margin-top: 2rem;
-    }
-    .mosaic-item { overflow: hidden; border-radius: 8px; }
-    .mosaic-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
-    .mosaic-item:nth-child(2) { grid-column: span 2; }
-    .mosaic-item img { width: 100%; height: 100%; }
-    .mosaic-item:hover img { transform: scale(1.05); }
-
     /* FLOATING LETTERS */
     .hero-title span{display:inline-block;animation:float 6s ease-in-out infinite;}
     .hero-title span:nth-child(even){animation-delay:1.5s;}
     @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+    h3{font-family:Georgia,serif;}
 
     /* HERO */
+    .hero{position:relative;}
+
+    .bg-video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-1;opacity:.35;}
+
     .hero{
       min-height:100vh;
       background:linear-gradient(180deg,rgba(1,69,116,.95),rgba(1,69,116,.7)),url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=80') center/cover;
@@ -75,160 +51,365 @@
       align-items:flex-start;
       padding:10vh 10vw;
     }
-    .bg-video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-1;opacity:.35;}
+
     .hero h1{font-size:clamp(3.5rem,7vw,7rem);max-width:10ch;}    
     .hero p{max-width:420px;margin:1.2rem 0;font-size:1.05rem;}
-    .scroll-btn{margin-top:2.5rem;border-bottom:2px solid var(--gold);padding:.4rem 0;color:var(--gold);text-transform:uppercase;letter-spacing:.18em;background:none;border-radius:0;cursor:pointer;}
+
+    .scroll-btn{margin-top:2.5rem;border-bottom:2px solid var(--gold);padding:.4rem 0;color:var(--gold);text-transform:uppercase;letter-spacing:.18em;background:none;border-radius:0;}
 
     /* EDITORIAL */
     .two-col{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
 
+    .img-placeholder{background:linear-gradient(135deg,var(--navy),var(--sun));height:360px;border-radius:0;opacity:.9;}
+
     /* INDEX */
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;}
+
     .card{background:linear-gradient(135deg,#ffffff,var(--white));border-radius:32px;padding:3rem;text-align:left;box-shadow:0 18px 60px rgba(0,0,0,.12);position:relative;overflow:hidden;}
-    .btn{display:inline-flex;align-items:center;justify-content:center;padding:.75rem 1.25rem;border-radius:999px;border:1px solid rgba(0,0,0,.12);background:transparent;color:#111;font-weight:700;text-decoration:none;}
+    .card h3{font-size:1.1rem;margin-bottom:.6rem;letter-spacing:.02em;}
+    .card p{color:#333;font-size:.98rem;margin-bottom:1.2rem;}
+
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:.75rem 1.25rem;border-radius:999px;
+      border:1px solid rgba(0,0,0,.12);
+      background:transparent;color:#111;font-weight:700;
+      text-decoration:none;
+    }
+
     .btn.primary{border:none;background:linear-gradient(135deg,var(--navy),var(--sun));color:white;}
+    .btn.primary:hover{opacity:.9;}
 
     /* SECTION BLOCKS */
-    .section-block{background:#fff;border-radius:18px;padding:3rem;box-shadow:0 12px 40px rgba(0,0,0,.05); margin-top:2rem;}
+    .section-block{background:#fff;border-radius:0;padding:5rem;box-shadow:none;border-top:1px solid #eee;}
+    .section-block:nth-child(even){background:linear-gradient(135deg,#f6f1eb,#ffffff);}
+    .section-block{background:#fff;border-radius:18px;padding:3rem;box-shadow:0 12px 40px rgba(0,0,0,.05);}
+    .section-block + .section-block{margin-top:2rem;}
+    .section-head{display:flex;gap:1.5rem;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;}
     .kicker{color:var(--gray);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.78rem;}
     .section-title{font-size:1.9rem;margin:.3rem 0 1rem 0;}
+    .section-desc{max-width:70ch;color:#222;margin-bottom:1.25rem;}
 
     .mini-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;margin-top:2.5rem;}
+
+    .mini{border:none;border-radius:28px;padding:2.5rem;color:#111;font-size:1.05rem;box-shadow:0 18px 50px rgba(0,0,0,.15);transform:rotate(-1deg);}    
+    .mini:nth-child(2){transform:rotate(1deg);}    
+    .mini:nth-child(3){transform:rotate(-.5deg);}
     .mini{border:none;border-radius:28px;padding:2.5rem;background:#fff;color:#111;font-size:1.05rem;box-shadow:0 18px 50px rgba(0,0,0,.15);}
+    .mini strong{display:block;margin-bottom:.35rem;}
 
     #predicas .mini{background:linear-gradient(135deg,var(--navy),var(--sun));color:white;}
     #testimonio .mini{background:linear-gradient(135deg,var(--rose),var(--gold));}
+    #cultura .mini{background:linear-gradient(135deg,var(--gray),var(--sun));}
+    #comunidad .mini{background:linear-gradient(135deg,var(--gold),#f6a15a);}    
+    #consejeria .mini{background:linear-gradient(135deg,var(--navy),var(--gold));color:white;}
 
-    /* FEATURE & PAUSA */
+    @media(max-width:900px){
+      .mini-grid{grid-template-columns:1fr;}
+    }
+
+    /* FEATURE */
+    .section-video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1;opacity:.4;}
+
+    .motion-shape{position:absolute;width:300px;height:300px;border-radius:50%;filter:blur(80px);opacity:.35;animation:drift 18s linear infinite;}
+
+    .motion-blue{background:var(--navy);top:10%;left:-5%;}
+    .motion-sun{background:var(--sun);bottom:5%;right:-5%;}
+
+    @keyframes drift{0%{transform:translateY(0)}50%{transform:translateY(-80px)}100%{transform:translateY(0)}}
+
+    .verse-overlay{position:absolute;bottom:15%;left:10%;font-size:clamp(3rem,6vw,6rem);max-width:12ch;line-height:1.05;font-family:Georgia,serif;color:rgba(235,196,93,.95);}
+
+    .parallax{background-attachment:fixed;background-size:cover;background-position:center;}
+
     .feature{background:var(--navy);color:white;position:relative;overflow:hidden;}
-    .verse-overlay{position:absolute;bottom:15%;left:10%;font-size:clamp(2rem,5vw,5rem);max-width:15ch;line-height:1.05;font-family:Georgia,serif;color:rgba(235,196,93,.95); z-index:2;}
-    .parallax{background-attachment:fixed;background-size:cover;background-position:center; min-height: 80vh; display: flex; align-items: center; justify-content: center; position: relative;}
+    .feature .img-placeholder{height:70vh;margin:0;border-radius:0;}
+
+    .feature h2{font-size:3rem;margin-top:-6rem;position:relative;background:rgba(1,69,116,.85);display:inline-block;padding:1.5rem 2.5rem;}
+
+    .feature p{max-width:60ch;margin-top:2rem;font-size:1.05rem;}
+
+    .more-btn{display:inline-block;margin-top:2rem;border-bottom:2px solid var(--gold);padding:.4rem 0;color:var(--gold);background:transparent;font-weight:600;text-decoration:none;}
+
+    /* TIMELINE */
+    .timeline{margin-top:3rem;border-left:3px solid var(--gold);padding-left:3rem;display:grid;gap:3rem;}
+    .node span{font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);}
+    .node p{font-size:1.2rem;margin-top:.4rem;}
 
     /* CTA */
-    .cta{background:var(--navy);color:white;display:grid;grid-template-columns:1fr 1fr;gap:4rem; align-items: center;}
-    .cta button{background:var(--gold);border:none;padding:1rem 2rem;font-weight:700;border-radius:50px;cursor:pointer;}
+    .cta{background:var(--navy);color:white;display:grid;grid-template-columns:1fr 1fr;gap:4rem;}
 
+    .cta button{background:var(--gold);border:none;padding:1rem 2rem;font-weight:700;border-radius:50px;}
+
+    /* FOOTER */
     footer{text-align:center;padding:5rem;background:#111;color:white;}
 
     .floating-index{position:fixed;top:50%;right:2rem;transform:translateY(-50%);display:flex;flex-direction:column;gap:.75rem;z-index:99;}
     .floating-index a{text-decoration:none;color:white;background:rgba(1,69,116,.85);padding:.4rem .9rem;border-radius:999px;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;}
+    .floating-index a:hover{background:var(--gold);color:#111;}
 
     @media(max-width:900px){
       .two-col,.cta{grid-template-columns:1fr;}
-      .mosaic-grid { grid-template-columns: repeat(2, 1fr); }
+      .weeks{grid-template-columns:1fr 1fr;}
+    }
+
+    @media(max-width:600px){
+      .weeks{grid-template-columns:1fr;}
+      section{padding:4rem 6vw;}
     }
   </style>
 </head>
 <body>
+<script>
+/*
+  Paging scroll ("pasar páginas")
+  Fix: evitamos saltos hacia arriba cuando no se detecta correctamente la sección actual.
+  - Calcula la sección más cercana al top (mínima distancia absoluta)
+  - Ignora deltas pequeños del wheel
+  - previene el scroll nativo durante el paging para evitar "rebote" con scroll-snap
+*/
+(function(){
+  let isPaging = false;
+  const MIN_DELTA = 18;
 
+  function getSections(){
+    return Array.from(document.querySelectorAll('section'));
+  }
+
+  function getCurrentIndex(sections){
+    let currentIdx = 0;
+    let best = Infinity;
+    for (let i = 0; i < sections.length; i++){
+      const top = Math.abs(sections[i].getBoundingClientRect().top);
+      if (top < best){ best = top; currentIdx = i; }
+    }
+    return currentIdx;
+  }
+
+  function pageBy(dir){
+    const sections = getSections();
+    if (!sections.length) return;
+    const idx = getCurrentIndex(sections);
+    const target = sections[idx + dir];
+    if (!target) return;
+
+    isPaging = true;
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.setTimeout(() => { isPaging = false; }, 950);
+  }
+
+  window.addEventListener('wheel', (e) => {
+    // En móviles y pantallas pequeñas, dejamos el scroll normal.
+    if (window.matchMedia('(max-width: 600px)').matches) return;
+    if (isPaging) { e.preventDefault(); return; }
+
+    // Evitar triggers por trackpad muy suave
+    if (Math.abs(e.deltaY) < MIN_DELTA) return;
+
+    e.preventDefault();
+    const dir = e.deltaY > 0 ? 1 : -1;
+    pageBy(dir);
+  }, { passive: false });
+
+  // CTA del hero
+  document.querySelector('.scroll-btn')?.addEventListener('click', () => {
+    document.getElementById('indice')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+})();
+</script>
+
+  <!-- FLOATING INDEX MENU -->
   <nav class="floating-index">
     <a href="#tema">Tema</a>
     <a href="#predicas">Prédicas</a>
     <a href="#testimonio">Testimonio</a>
+    <a href="#cultura">Cultura</a>
     <a href="#comunidad">Comunidad</a>
     <a href="#consejeria">Consejería</a>
   </nav>
 
-  <section class="hero">
+  <!-- HERO -->
+  <section class="hero snap">
     <video class="bg-video" autoplay muted loop playsinline>
       <source src="https://cdn.coverr.co/videos/coverr-light-rays-through-trees-1567/1080p.mp4" type="video/mp4" />
     </video>
     <h1 class="hero-title"><span>H</span><span>E</span><span>B</span><span>R</span><span>E</span><span>O</span><span>S</span> <span>1</span><span>1</span> <span>C</span><span>O</span><span>N</span><span>E</span><span>C</span><span>T</span><span>A</span></h1>
     <p>Conectados en tiempos de cambio</p>
-    <div class="scroll-btn" onclick="document.getElementById('indice').scrollIntoView({behavior:'smooth'})">Explorar edición ↓</div>
+    <div class="scroll-btn">Explorar edición ↓</div>
   </section>
 
+  <!-- EDITORIAL -->
   <section class="two-col">
     <div>
-      <div class="kicker">Carta Mensual</div>
-      <h2 style="font-size: 3rem; margin-bottom: 1rem;">Editorial</h2>
-      <p>Mensaje del liderazgo sobre el enfoque espiritual del mes. La importancia de permanecer unidos en la roca firme mientras el mundo a nuestro alrededor fluye y cambia constantemente.</p>
+      <h2>Editorial</h2>
+      <p>Mensaje del liderazgo sobre el enfoque espiritual del mes.</p>
     </div>
-    <div style="height: 450px;">
-        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80" alt="Editorial" class="img-magazine">
-    </div>
+    <div class="img-placeholder"></div>
   </section>
 
+  <!-- INDEX -->
   <section id="indice" class="art-block">
     <h2>Índice de la edición</h2>
+    <p style="max-width:70ch;margin-top:.75rem;color:#333;">Lo esencial está aquí mismo en el scroll. Cada tarjeta te deja ver lo importante y, si quieres profundizar, entras con <strong>Más</strong>.</p>
     <div class="grid" style="margin-top:2.5rem;">
-      <div class="card">
+      <div class="card art-card">
         <h3>Tema Central</h3>
-        <p>Verso base y reflexión principal.</p>
+        <p>Verso base, reflexión principal y aplicación práctica del mes.</p>
         <a class="btn primary" href="#tema">Más</a>
       </div>
-      <div class="card">
+      <div class="card art-card">
+        <h3>Prédicas</h3>
+        <p>Síntesis semanal: verso base, puntos clave y foto del servicio.</p>
+        <a class="btn primary" href="#predicas">Más</a>
+      </div>
+      <div class="card art-card">
+        <h3>Testimonio</h3>
+        <p>Una historia real de fe y transformación para edificar.</p>
+        <a class="btn primary" href="#testimonio">Más</a>
+      </div>
+      <div class="card art-card">
+        <h3>Cultura & Sociedad</h3>
+        <p>Lectura del mundo con lente bíblico: contexto + verso relevante.</p>
+        <a class="btn primary" href="#cultura">Más</a>
+      </div>
+      <div class="card art-card">
         <h3>Comunidad</h3>
-        <p>Eventos, hitos y vida de iglesia.</p>
+        <p>Eventos, celebraciones, hitos y vida de iglesia.</p>
         <a class="btn primary" href="#comunidad">Más</a>
       </div>
-      <div class="card">
+      <div class="card art-card">
         <h3>Consejería</h3>
-        <p>Canal seguro para apoyo pastoral.</p>
+        <p>Canal seguro para acompañamiento y apoyo pastoral.</p>
         <a class="btn primary" href="#consejeria">Más</a>
       </div>
     </div>
   </section>
 
-  <section id="tema" class="feature full-bleed">
-    <div style="height: 60vh; width: 100%; position: relative;">
-        <img src="https://images.unsplash.com/photo-1499209974431-9dac3adaf471?auto=format&fit=crop&w=1800&q=80" alt="Tema del mes" style="width: 100%; height: 100%;">
-        <div style="position: absolute; inset: 0; background: rgba(1,69,116,0.4);"></div>
-        <h2 style="position: absolute; bottom: 20px; left: 10vw; font-size: 4rem; color: var(--gold);">Tema del Mes</h2>
-    </div>
-    <div style="padding: 4rem 10vw;">
-        <p><span class="kicker">Verso base</span><br/>"Es, pues, la fe la certeza de lo que se espera, la convicción de lo que no se ve." Una mirada profunda al capítulo de los héroes de la fe.</p>
-    </div>
+  <!-- FEATURE -->
+  <section id="tema" class="feature section-video snap">
+    <video autoplay muted loop playsinline>
+      <source src="https://cdn.coverr.co/videos/coverr-slow-clouds-1573/1080p.mp4" type="video/mp4" />
+    </video>
+    <div class="motion-shape motion-blue"></div>
+    <div class="motion-shape motion-sun"></div>
+    <div class="img-placeholder"></div>
+    <h2>Tema del Mes</h2>
+    <p><span class="kicker">Verso base</span><br/>Artículo principal con verso, reflexión y aplicación práctica. Aquí vive el mensaje que gobierna la edición.</p>
   </section>
 
-  <section id="comunidad">
-    <div class="section-head">
+  <section>
+    <h2>En el scroll</h2>
+    <p style="max-width:70ch;margin-top:.75rem;color:#333;">Estas secciones muestran lo fundamental aquí mismo. El botón <strong>Más</strong> solo amplía detalles o abre una lectura completa.</p>
+
+    <div id="predicas" class="section-block art-block">
+      <div class="section-head">
         <div>
-          <div class="kicker">Vida de Iglesia</div>
-          <div class="section-title">Comunidad en Acción</div>
-          <p class="section-desc">Momentos especiales de nuestras graduaciones, celebraciones y el día a día de nuestra familia espiritual.</p>
+          <div class="kicker">Prédicas del mes</div>
+          <div class="section-title">Un recorrido visual semana a semana</div>
+          <p class="section-desc">La enseñanza del mes narrada como línea de tiempo: verso base, imagen y aplicación espiritual.</p>
         </div>
+      </div>
+
+      <div class="timeline">
+        <div class="node"><span>Semana 1</span><p>Verso central · Dirección espiritual</p></div>
+        <div class="node"><span>Semana 2</span><p>Llamado · Respuesta · Comunidad</p></div>
+        <div class="node"><span>Semana 3</span><p>Transformación · Testimonio</p></div>
+        <div class="node"><span>Semana 4</span><p>Envío · Acción</p></div>
+      </div>
+
+      <div class="mini-grid">
+        <div class="mini"><strong>Semana 1</strong><span>Verso + 3 puntos clave</span></div>
+        <div class="mini"><strong>Semana 2</strong><span>Verso + 3 puntos clave</span></div>
+        <div class="mini"><strong>Semana 3</strong><span>Verso + 3 puntos clave</span></div>
+      </div>
     </div>
 
-    <div class="mosaic-grid">
-        <div class="mosaic-item"><img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800" alt="Evento 1"></div>
-        <div class="mosaic-item"><img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=800" alt="Graduacion"></div>
-        <div class="mosaic-item"><img src="https://images.unsplash.com/photo-1529070532901-ba8c350e6408?auto=format&fit=crop&w=800" alt="Reunion"></div>
-        <div class="mosaic-item"><img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800" alt="Taller"></div>
+    <div id="testimonio" class="section-block art-block">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Testimonio</div>
+          <div class="section-title">Historias reales que edifican</div>
+          <p class="section-desc">Una historia breve, poderosa y humana. Incluye una cita destacada y un cierre con enseñanza práctica.</p>
+          <a class="btn primary" href="#">Más (leer completo)</a>
+        </div>
+      </div>
+      <div class="mini-grid">
+        <div class="mini"><strong>Cita clave</strong><span>Una frase que resume la transformación</span></div>
+        <div class="mini"><strong>Momento</strong><span>El punto de quiebre / respuesta de fe</span></div>
+        <div class="mini"><strong>Aplicación</strong><span>Qué aprender y cómo vivirlo</span></div>
+      </div>
+    </div>
+
+    <div id="cultura" class="section-block art-block">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Cultura & sociedad</div>
+          <div class="section-title">Enterarme, discernir, responder</div>
+          <p class="section-desc">Un artículo editorial sobre un tema actual (política, sociedad, cultura), interpretado con lente bíblico e incluyendo un verso relevante.</p>
+          <a class="btn primary" href="#">Más (ver artículo)</a>
+        </div>
+      </div>
+      <div class="mini-grid">
+        <div class="mini"><strong>Contexto</strong><span>Qué pasó y por qué importa</span></div>
+        <div class="mini"><strong>Verso</strong><span>Base bíblica para discernir</span></div>
+        <div class="mini"><strong>Respuesta</strong><span>Qué hacemos como iglesia</span></div>
+      </div>
+    </div>
+
+    <div id="comunidad" class="section-block art-block">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Comunidad</div>
+          <div class="section-title">Vida de iglesia, en primera fila</div>
+          <p class="section-desc">Cumpleaños, graduaciones, eventos, "married to be" y momentos especiales. Enfoque humano, cálido y ordenado.</p>
+          <a class="btn primary" href="#">Más (ver álbum)</a>
+        </div>
+      </div>
+      <div class="mini-grid">
+        <div class="mini"><strong>Celebraciones</strong><span>Cumpleaños y logros</span></div>
+        <div class="mini"><strong>Eventos</strong><span>Fotos y highlights</span></div>
+        <div class="mini"><strong>Anuncios</strong><span>Lo que viene este mes</span></div>
+      </div>
+    </div>
+
+    <div id="consejeria" class="section-block">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Consejería</div>
+          <div class="section-title">Acompañamiento y cuidado</div>
+          <p class="section-desc">Un espacio privado para solicitar consejería/psicología o apoyo pastoral. Respuesta humana, segura y confidencial.</p>
+          <a class="btn primary" href="#">Más (solicitar)</a>
+        </div>
+      </div>
+      <div class="mini-grid">
+        <div class="mini"><strong>Oración</strong><span>Solicitud breve y confidencial</span></div>
+        <div class="mini"><strong>Cita</strong><span>Agenda un acompañamiento</span></div>
+        <div class="mini"><strong>Seguimiento</strong><span>Canal de contacto</span></div>
+      </div>
     </div>
   </section>
 
-  <section class="parallax" style="background-image:url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=1800&q=80')">
-    <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.3);"></div>
+  <!-- PAUSA EDITORIAL -->
+  <section class="feature full-bleed parallax" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1800&q=80')">
+    <div class="img-placeholder"></div>
     <div class="verse-overlay">"La fe es la certeza de lo que se espera"</div>
+    <p>Una página–pausa visual con verso, fotografía a sangre y silencio editorial antes de invitar al lector a participar.</p>
   </section>
 
+  <!-- CTA -->
   <section class="cta">
     <div>
       <h2>Participa</h2>
-      <p>Tu historia puede ser la inspiración que alguien más necesita hoy. Envía tu testimonio o únete a nuestras actividades.</p>
+      <p>Envía tu testimonio, solicita consejería o únete al evangelismo.</p>
       <button>Enviar historia</button>
     </div>
-    <div style="height: 300px;">
-        <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=800" alt="Participa" class="img-magazine">
-    </div>
+    <div class="img-placeholder"></div>
   </section>
 
+  <!-- FOOTER -->
   <footer>
-    <p>Hebreos 11 Conecta · Revista Digital © 2026</p>
+    <p>Hebreos 11 Conecta · Revista Digital</p>
   </footer>
 
-  <script>
-    // Script simple para el scroll suave de los links
-    document.querySelectorAll('nav a').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
-  </script>
 </body>
 </html>

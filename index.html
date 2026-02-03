@@ -19,13 +19,13 @@
     }
 
     *{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui,sans-serif;}
-    html{scroll-behavior:smooth;scroll-snap-type:y mandatory;}
+    html{scroll-behavior:smooth;} /*scroll-snap-type:y mandatory;*/
     body{background:linear-gradient(180deg,#f6f1eb,#ffffff);color:#111;line-height:1.6;overflow-x: hidden;}
 
     /* =========================================
        2. ESTRUCTURA DE SECCIONES
        ========================================= */
-    section{padding:9rem 10vw;scroll-snap-align:start;position:relative;overflow:hidden;}
+    section{padding:9rem 10vw;position:relative;overflow:hidden;}
     .art-block{background:linear-gradient(135deg,#ffffff,#f0ede6);}
     .full-bleed{padding:0;}
     .two-col{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
@@ -206,10 +206,49 @@
     @media(max-width:600px){
       section{padding:4rem 6vw;}
     }
+/* =========================================
+   WEB CTA FINAL
+========================================= */
+
+.web-cta{
+  background: var(--navy);
+  color: white;
+  text-align:center;
+  padding:6rem 10vw;
+}
+
+.web-cta h2{
+  font-size:2.4rem;
+  margin-bottom:.75rem;
+}
+
+.web-cta p{
+  max-width:60ch;
+  margin:0 auto 2rem auto;
+  opacity:.9;
+}
+
+/* BOTÓN BLANCO / DORADO */
+
+.btn-white{
+  display:inline-block;
+  padding:1rem 2rem;
+  border-radius:999px;
+  background: var(--gold);
+  color: var(--navy);
+  font-weight:800;
+  text-decoration:none;
+  letter-spacing:.05em;
+}
+
+.btn-white:hover{
+  opacity:.9;
+}
+    
   </style>
 </head>
 <body>
-
+<!-- QUITAR EL SCRIPT PARA EL SCROLL POR SECCIONES
 <script>
 let isScrolling=false;
 window.addEventListener('wheel',e=>{
@@ -220,7 +259,7 @@ window.addEventListener('wheel',e=>{
   const target=sections[idx+dir];
   if(target){isScrolling=true;target.scrollIntoView({behavior:'smooth'});setTimeout(()=>isScrolling=false,900);}
 });
-</script>
+</script>-->
 
   <nav class="floating-index">
     <a href="#tema">Tema</a>
@@ -267,6 +306,7 @@ window.addEventListener('wheel',e=>{
         <h3>Lo Predicado</h3>
         <p>Síntesis semanal: verso base, puntos clave y foto del servicio.</p>
         <a class="btn primary" href="#predicas">Más</a>
+
       </div>
       <div class="card art-card">
         <h3>Testimonio</h3>
@@ -312,6 +352,8 @@ window.addEventListener('wheel',e=>{
           <div class="kicker">Lo predicado en el mes</div>
           <div class="section-title">Un recorrido visual semana a semana</div>
           <p class="section-desc">La enseñanza del mes narrada como línea de tiempo.</p>
+          <a class="btn primary" href="predica.html" style="margin-left:.75rem;">Transmisiones en vivo</a>
+
         </div>
       </div>
       <div class="timeline">
@@ -344,7 +386,7 @@ window.addEventListener('wheel',e=>{
       </div>
     </div>
 
-    <div id="acompañame" class="section-block">
+    <div id="acompañame" class="section-block art-block">
       <div class="section-head">
         <div>
           <div class="kicker">Acompáñame</div>
@@ -388,7 +430,7 @@ window.addEventListener('wheel',e=>{
         <div class="mini"><strong>Verso</strong><span>Un estudio entre padres cristianos reveló que servir en la iglesia, orar regularmente y leer la Biblia, son los factores que más inciden en que un niño no abandone la fe al crecer.</span></div>
       </div>
     </div>
-
+ </section>
 
   <section class="feature full-bleed parallax" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1800&q=80')">
     <div class="img-placeholder"></div>
@@ -404,13 +446,16 @@ window.addEventListener('wheel',e=>{
     </div>
     <div class="img-placeholder"></div>
   </section>
-
+  
+<section class="web-cta"> ... </section>
+  
   <footer>
     <p>Hebreos 11 Conecta · Revista Digital · 2026</p>
   </footer>
 
 </body>
 </html>
+
 
 
 

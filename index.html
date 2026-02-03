@@ -163,9 +163,9 @@
     .mini strong{display:block;margin-bottom:.35rem;}
 
     #predicas .mini{background:linear-gradient(135deg,var(--navy),var(--sun));color:white;}
+    #comunidad .mini{background:linear-gradient(135deg,var(--gold),#f6a15a);}    
     #testimonio .mini{background:linear-gradient(135deg,var(--rose),var(--gold));}
     #codigo .mini{background:linear-gradient(135deg,var(--gray),var(--sun));}
-    #comunidad .mini{background:linear-gradient(135deg,var(--gold),#f6a15a);}    
     #acompañame .mini{background:linear-gradient(135deg,var(--navy),var(--gold));color:white;}
 
     /* =========================================
@@ -210,40 +210,14 @@
    WEB CTA FINAL
 ========================================= */
 
-.web-cta{
-  background: var(--navy);
-  color: white;
-  text-align:center;
-  padding:6rem 10vw;
-}
+.web-cta { text-align: center; padding: 5rem 10vw; background: var(--navy); color: white; }
+    .btn-white { background: white; color: var(--navy); padding: 1rem 2.5rem; border-radius: 50px; font-weight: bold; text-decoration: none; display: inline-block; margin-top: 1.5rem; transition: 0.3s; }
+    .btn-white:hover { background: var(--gold); }
+    footer{text-align:center; padding:5rem; background:#111; color:white;}
 
-.web-cta h2{
-  font-size:2.4rem;
-  margin-bottom:.75rem;
-}
-
-.web-cta p{
-  max-width:60ch;
-  margin:0 auto 2rem auto;
-  opacity:.9;
-}
-
-/* BOTÓN BLANCO / DORADO */
-
-.btn-white{
-  display:inline-block;
-  padding:1rem 2rem;
-  border-radius:999px;
-  background: var(--gold);
-  color: var(--navy);
-  font-weight:800;
-  text-decoration:none;
-  letter-spacing:.05em;
-}
-
-.btn-white:hover{
-  opacity:.9;
-}
+    @media(max-width:900px){
+      .two-col{grid-template-columns:1fr;}
+    }
     
   </style>
 </head>
@@ -264,9 +238,9 @@ window.addEventListener('wheel',e=>{
   <nav class="floating-index">
     <a href="#tema">Tema</a>
     <a href="#predicas">Lo Predicado</a>
+    <a href="#comunidad">Comunidad</a>
     <a href="#testimonio">Testimonio</a>
     <a href="#codigo">Te tengo un código</a>
-    <a href="#comunidad">Comunidad</a>
     <a href="#acompañame">Acompáñame</a>
   </nav>
 
@@ -307,17 +281,7 @@ window.addEventListener('wheel',e=>{
         <p>Síntesis semanal: verso base, puntos clave y foto del servicio.</p>
         <a class="btn primary" href="#predicas">Más</a>
 
-      </div>
-      <div class="card art-card">
-        <h3>Testimonio</h3>
-        <p>Una historia real de fe y transformación para edificar.</p>
-        <a class="btn primary" href="#testimonio">Más</a>
-      </div>
-      <div class="card art-card">
-        <h3>Te tengo un código</h3>
-        <p>Lectura del mundo con lente bíblico: contexto + verso relevante.</p>
-        <a class="btn primary" href="#codigo">Más</a>
-      </div>
+   
       <div class="card art-card">
         <h3>Comunidad</h3>
         <p>Eventos, celebraciones, hitos y vida de iglesia.</p>
@@ -329,6 +293,17 @@ window.addEventListener('wheel',e=>{
         <a class="btn primary" href="#acompañame">Más</a>
       </div>
     </div>
+         </div>
+      <div class="card art-card">
+        <h3>Testimonio</h3>
+        <p>Una historia real de fe y transformación para edificar.</p>
+        <a class="btn primary" href="#testimonio">Más</a>
+      </div>
+      <div class="card art-card">
+        <h3>Te tengo un código</h3>
+        <p>Lectura del mundo con lente bíblico: contexto + verso relevante.</p>
+        <a class="btn primary" href="#codigo">Más</a>
+      </div>
   </section>
 
   <section id="tema" class="feature section-video snap">
@@ -386,22 +361,7 @@ window.addEventListener('wheel',e=>{
       </div>
     </div>
 
-    <div id="acompañame" class="section-block art-block">
-      <div class="section-head">
-        <div>
-          <div class="kicker">Acompáñame</div>
-          <div class="section-title">Acompañamiento como iglesia</div>
-          <a class="btn primary" href="acompañame.html">Más (solicitar)</a>
-        </div>
-      </div>
-      <div class="mini-grid">
-        <div class="mini"><strong>Oración</strong><span>Solicitud breve y confidencial</span></div>
-        <div class="mini"><strong>Cita</strong><span>Agenda un acompañamiento</span></div>
-      </div>
-    </div>
-  </section>
-
-    <div id="testimonio" class="section-block art-block">
+      <div id="testimonio" class="section-block art-block">
       <div class="section-head">
         <div>
           <div class="kicker">Testimonio</div>
@@ -431,6 +391,7 @@ window.addEventListener('wheel',e=>{
       </div>
     </div>
  </section>
+    
 
   <section class="feature full-bleed parallax" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1800&q=80')">
     <div class="img-placeholder"></div>
@@ -447,7 +408,11 @@ window.addEventListener('wheel',e=>{
     <div class="img-placeholder"></div>
   </section>
   
-<section class="web-cta"> ... </section>
+<section class="web-cta">
+    <h2 style="color:var(--gold);">¿Deseas conocer más sobre nuestra casa?</h2>
+    <p>Visita nuestra página oficial para horarios, ubicación y liderazgo.</p>
+    <a href="iglesia.html" class="btn-white">Ver página web de Hebreos 11</a>
+  </section>
   
   <footer>
     <p>Hebreos 11 Conecta · Revista Digital · 2026</p>
@@ -455,6 +420,7 @@ window.addEventListener('wheel',e=>{
 
 </body>
 </html>
+
 
 
 

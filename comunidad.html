@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Comunidad – Hebreos Conecta</title>
+  <title>Vida & Comunidad – Hebreos Conecta</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     :root {
@@ -14,105 +14,94 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
     body { background-color: var(--white); color: #111; line-height: 1.6; overflow-x: hidden; }
 
-    /* MENÚ LATERAL */
+    /* --- MENÚ MÁS OCULTO (Solo asoma el 15%) --- */
     .floating-index {
       position: fixed; top: 50%; right: 0;
-      transform: translateY(-50%) translateX(78%); 
+      transform: translateY(-50%) translateX(88%); /* Más oculto que antes */
       display: flex; flex-direction: column; gap: .75rem;
       z-index: 999; background: var(--navy);
       padding: 2rem 1.2rem 2rem 2.5rem;
       border-radius: 30px 0 0 30px;
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       box-shadow: -10px 0 30px rgba(0,0,0,0.3);
       cursor: pointer;
     }
     .floating-index:hover { transform: translateY(-50%) translateX(0); }
     .floating-index::before {
-      content: "MENÚ ◀"; position: absolute; left: -25px; top: 50%;
+      content: "MENÚ ◀"; position: absolute; left: -22px; top: 50%;
       transform: translateY(-50%) rotate(-90deg);
-      font-size: 0.85rem; color: var(--gold); font-weight: 800;
-      letter-spacing: 3px; white-space: nowrap;
+      font-size: 0.75rem; color: var(--gold); font-weight: 800;
+      letter-spacing: 3px; white-space: nowrap; opacity: 0.8;
     }
     .floating-index a {
       text-decoration: none; color: white; background: rgba(255, 255, 255, 0.1);
       padding: .6rem 1.2rem; border-radius: 999px; font-size: .75rem;
       text-transform: uppercase; transition: 0.3s; white-space: nowrap; display: block;
     }
+    .floating-index a:hover { background: var(--gold); color: var(--navy); }
 
     /* HEADER */
     header {
-      padding: 6rem 10vw 4rem;
-      text-align: left;
-      border-bottom: 2px solid var(--navy);
-      background: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
+      padding: 6rem 10vw 4rem; text-align: left;
+      border-bottom: 2px solid var(--navy); background: white;
+      display: flex; justify-content: space-between; align-items: flex-end;
     }
-    
-    /* VOLVER A LA DERECHA */
     .back-link {
-      text-decoration: none;
-      color: var(--navy);
-      font-weight: 800;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      padding-bottom: 10px;
-      transition: 0.3s;
+      text-decoration: none; color: var(--navy); font-weight: 800;
+      font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px;
+      padding-bottom: 10px; transition: 0.3s;
     }
     .back-link:hover { color: var(--gold); }
-
-    .kicker-main { font-weight: 800; text-transform: uppercase; letter-spacing: 5px; color: var(--gold); font-size: 0.8rem; }
     h1 { font-family: 'Georgia', serif; font-size: clamp(3rem, 10vw, 8rem); line-height: 0.9; color: var(--navy); }
 
     .container { max-width: 1300px; margin: 0 auto; padding: 4rem 2rem; }
 
     /* GRID EDITORIAL */
-    .magazine-layout { display: grid; grid-template-columns: repeat(12, 1fr); gap: 5rem; }
+    .magazine-layout { display: grid; grid-template-columns: repeat(12, 1fr); gap: 4rem; }
 
-    /* --- ESTILO DE "KICKERS" (TÍTULOS DE SEGMENTO) LLAMATIVOS --- */
-    .kicker {
-      display: block;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      font-size: 1.2rem; /* Mucho más grande */
-      margin-bottom: 1rem;
-    }
+    /* CATEGORÍAS (KICKERS) */
+    .kicker { display: block; font-weight: 900; text-transform: uppercase; letter-spacing: 3px; font-size: 1.2rem; margin-bottom: 1rem; }
 
+    /* --- CELEBRANDO LA VIDA (REDISEÑO RESPONSIVE) --- */
     .sec-birthdays { grid-column: span 4; background: var(--navy); color: white; padding: 3rem; border-radius: 0 50px 0 50px; }
-    .sec-birthdays h2 { font-family: Georgia; font-size: 2.5rem; margin-bottom: 2rem; border-bottom: 1px solid var(--gold); }
-    .b-item { display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 1.1rem; }
-    .b-item span { color: var(--gold); font-weight: bold; }
+    .sec-birthdays h2 { font-family: Georgia; font-size: 2.2rem; margin-bottom: 2rem; border-bottom: 1px solid var(--gold); }
+    
+    .b-item { 
+      display: flex; 
+      align-items: baseline; 
+      margin-bottom: 1.2rem; 
+      font-size: 1.05rem; 
+    }
+    /* Línea de puntos que conecta nombre y fecha */
+    .b-item::after {
+      content: ""; flex: 1; border-bottom: 1px dotted rgba(255,255,255,0.3);
+      margin: 0 10px; order: 2;
+    }
+    .b-item .b-name { order: 1; text-transform: uppercase; }
+    .b-item .b-date { order: 3; color: var(--gold); font-weight: bold; min-width: 60px; text-align: right; }
 
+    /* OTROS SEGMENTOS */
     .sec-wedding { grid-column: span 8; background: #fff; padding: 2rem; border: 1px solid #ddd; display: flex; gap: 2rem; align-items: center; }
-    .wedding-frame { width: 40%; height: 320px; background: #ddd; overflow: hidden; }
+    .wedding-frame { width: 40%; height: 320px; overflow: hidden; }
     .wedding-frame img { width: 100%; height: 100%; object-fit: cover; }
     .wedding-info .kicker { color: var(--accent-rose); border-left: 5px solid var(--accent-rose); padding-left: 10px; }
-    .wedding-info h2 { font-family: Georgia; font-size: 3rem; color: #111; }
+    .wedding-info h2 { font-family: Georgia; font-size: 3rem; }
 
-    /* GLORIA A DIOS - IMPACTO TOTAL */
     .sec-gloria { grid-column: span 7; background: var(--gold); padding: 4rem; position: relative; }
-    .sec-gloria .kicker { color: var(--navy); font-size: 2.5rem; letter-spacing: -1px; line-height: 1; margin-bottom: 1.5rem; }
+    .sec-gloria .kicker { color: var(--navy); font-size: 2.5rem; letter-spacing: -1px; line-height: 1; }
     .gloria-content { display: flex; align-items: center; gap: 2rem; }
-    .gloria-img { width: 220px; height: 220px; border-radius: 50%; border: 10px solid white; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+    .gloria-img { width: 220px; height: 220px; border-radius: 50%; border: 10px solid white; object-fit: cover; }
 
     .sec-entrepreneur { grid-column: span 5; background: #111; color: white; padding: 3rem; }
-    .sec-entrepreneur .kicker { color: var(--accent-teal); font-size: 1rem; }
+    .sec-entrepreneur .kicker { color: var(--accent-teal); }
     .entrepreneur-photo { width: 100%; height: 260px; object-fit: cover; border-radius: 24px; margin-bottom: 1.5rem; }
-    .btn-more { color: var(--gold); text-decoration: none; font-weight: 800; border-bottom: 2px solid var(--gold); margin-top: 1rem; display: inline-block; }
+    .btn-more { color: var(--gold); text-decoration: none; font-weight: 800; border-bottom: 2px solid var(--gold); display: inline-block; margin-top: 1rem; }
 
     .sec-single { grid-column: span 6; background: white; padding: 2rem; border: 10px solid var(--white); text-align: center; }
-    .sec-single .kicker { color: var(--navy); border-bottom: 2px solid var(--navy); display: inline-block; padding-bottom: 5px; }
     .single-img { width: 100%; height: 400px; object-fit: cover; filter: grayscale(100%); transition: 0.5s; }
     .sec-single:hover .single-img { filter: grayscale(0%); }
 
-    /* NOTA DE PESAR - FONDO NEGRO */
-    .sec-luto { 
-        grid-column: span 6; display: flex; align-items: center; justify-content: center; 
-        background: #000; color: #fff; padding: 3.5rem; border-left: 15px solid var(--gold); 
-    }
+    .sec-luto { grid-column: span 6; background: #000; color: #fff; padding: 3.5rem; border-left: 15px solid var(--gold); text-align: center; }
     .sec-luto .kicker { color: var(--gold); }
 
     footer { padding: 5rem 10vw; text-align: center; background: var(--navy); color: white; }
@@ -120,10 +109,18 @@
     .footer-socials a { color: white; font-size: 1.5rem; transition: 0.3s; }
     .footer-socials a:hover { color: var(--gold); transform: translateY(-5px); }
 
+    /* RESPONSIVE */
+    @media (max-width: 1100px) {
+      .sec-birthdays { grid-column: span 5; }
+      .sec-wedding { grid-column: span 7; }
+    }
     @media (max-width: 900px) {
       .magazine-layout > div { grid-column: span 12 !important; }
-      header { flex-direction: column; align-items: flex-start; }
-      .back-link { order: -1; margin-bottom: 1rem; }
+      header { flex-direction: column; align-items: flex-start; padding-top: 4rem; }
+      .back-link { position: absolute; top: 1.5rem; right: 10vw; }
+      .gloria-content { flex-direction: column; text-align: center; }
+      .sec-wedding { flex-direction: column; }
+      .wedding-frame { width: 100%; }
     }
   </style>
 </head>
@@ -131,7 +128,6 @@
 
   <nav class="floating-index">
     <a href="index.html">Portada</a>
-    <a href="index.html#tema">Tema</a>
     <a href="testimonio.html">Testimonio</a>
     <a href="codigo.html">Código</a>
     <a href="acompañame.html">Acompáñame</a>
@@ -139,7 +135,7 @@
 
   <header>
     <div>
-      <span class="kicker-main">Hebreos 11 Conecta</span>
+      <span style="font-weight: 800; text-transform: uppercase; letter-spacing: 5px; color: var(--gold); font-size: 0.8rem;">Hebreos 11 Conecta</span>
       <h1>VIDA &<br>COMUNIDAD.</h1>
     </div>
     <a href="index.html" class="back-link">Volver a la portada →</a>
@@ -151,18 +147,18 @@
       <div class="sec-birthdays">
         <span class="kicker" style="color:var(--gold)">Celebrando la Vida</span>
         <h2>Birthday Highlights</h2>
-        <div class="b-item">AGUEDA GONZALEZ <span>Feb 20</span></div>
-        <div class="b-item">ENMANUEL GARCIA <span>Feb 04</span></div>
-        <div class="b-item">FIOR FARIÑA<span>Feb 28</span></div>
-        <div class="b-item">ISRAEL MARTINEZ<span>Feb 04</span></div>
-        <div class="b-item">MARGARITA HERNANDEZ <span>Feb 04</span></div>
+        <div class="b-item"><span class="b-name">AGUEDA GONZALEZ</span> <span class="b-date">Feb 20</span></div>
+        <div class="b-item"><span class="b-name">ENMANUEL GARCIA</span> <span class="b-date">Feb 04</span></div>
+        <div class="b-item"><span class="b-name">FIOR FARIÑA</span> <span class="b-date">Feb 28</span></div>
+        <div class="b-item"><span class="b-name">ISRAEL MARTINEZ</span> <span class="b-date">Feb 04</span></div>
+        <div class="b-item"><span class="b-name">MARGARITA HERNANDEZ</span> <span class="b-date">Feb 04</span></div>
       </div>
 
       <div class="sec-wedding">
-        <div class="wedding-frame"><img src="boda.jpg" alt="Novios"></div>
+        <div class="wedding-frame"><img src="BODA.jpg" alt="Novios"></div>
         <div class="wedding-info">
           <span class="kicker">Married to be</span>
-          <h2>Leonardo y Eunice</h2>
+          <h2 style="font-family:Georgia; font-size: 2.8rem;">Marcos & Ana</h2>
           <p>Una nueva unión que nace bajo el propósito divino.</p>
         </div>
       </div>
@@ -196,9 +192,9 @@
       </div>
 
       <div class="sec-luto">
-        <div style="text-align:center;">
+        <div>
           <span class="kicker">Nota de Pesar</span>
-          <h2 style="font-family:Georgia; font-size:2rem; margin-bottom:1rem; color: var(--gold);">En Memoria</h2>
+          <h2 style="font-family:Georgia; font-size:2.5rem; margin-bottom:1rem; color: var(--gold);">En Memoria</h2>
           <p>Abrazamos en fe a la familia <strong>PERSONA X</strong>.</p>
         </div>
       </div>
@@ -208,11 +204,11 @@
 
   <footer>
     <div class="footer-socials">
-      <a href="https://instagram.com/iglesiavisionaria" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://facebook.com/iglesiavisionaria" target="_blank"><i class="fab fa-facebook-f"></i></a>
-      <a href="https://youtube.com/@iglesiavisionaria" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-youtube"></i></a>
     </div>
-    <div class="footer-copy">HEBREOS 11 CONECTA · EDICIÓN FEBRERO 2026</div>
+    <div class="footer-copy">HEBREOS 11 CONECTA · 2026</div>
   </footer>
 
 </body>

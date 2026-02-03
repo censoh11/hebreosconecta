@@ -24,23 +24,21 @@
       max-width: 500px;
       padding: 1rem 1.5rem;
       border-radius: 50px;
-      border: none;
+      border: 2px solid transparent;
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
       font-size: 1rem;
       outline: none;
-      border: 2px solid transparent;
       transition: 0.3s;
     }
     #searchInput:focus { border-color: var(--gold); transform: scale(1.02); }
     
-    /* ESTILO DE BOTONES */
     .filter-btn {
       background: white; border: none; padding: 0.6rem 1.2rem; 
       margin: 0.3rem; border-radius: 50px; cursor: pointer; 
       font-weight: bold; color: var(--navy); box-shadow: 0 4px 10px rgba(0,0,0,0.05);
       transition: 0.3s; font-size: 0.9rem;
     }
-    .filter-btn:hover, .filter-btn.active { background: var(--gold); color: var(--navy); transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
+    .filter-btn:hover, .filter-btn.active { background: var(--gold); color: var(--navy); transform: translateY(-2px); }
 
     /* GRID */
     .directory-grid {
@@ -77,11 +75,48 @@
     }
     .whatsapp-btn:hover { background: #128C7E; }
 
+    /* =========================================
+       NUEVA SECCIÓN: FORMULARIO CTA
+       ========================================= */
+    .join-section {
+      background: var(--navy); color: white;
+      padding: 5rem 10vw; text-align: center;
+      margin-top: 4rem;
+    }
+    .join-section h2 { font-family: 'Georgia', serif; font-size: 2rem; margin-bottom: 1rem; color: var(--gold); }
+    .join-section p { max-width: 600px; margin: 0 auto 2rem; opacity: 0.9; }
+    
+    .btn-form {
+      background: var(--gold); color: var(--navy);
+      padding: 1rem 2.5rem; border-radius: 50px;
+      text-decoration: none; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 1px;
+      display: inline-block; transition: 0.3s;
+    }
+    .btn-form:hover { background: white; transform: scale(1.05); }
+
+    /* BOTÓN FLOTANTE LATERAL */
+    .floating-join {
+      position: fixed; bottom: 30px; right: 30px;
+      background: var(--gold); color: var(--navy);
+      padding: 1rem 1.5rem; border-radius: 50px;
+      text-decoration: none; font-weight: 800;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      z-index: 100; font-size: 0.8rem;
+      text-transform: uppercase; display: flex; align-items: center; gap: 8px;
+      transition: 0.3s;
+    }
+    .floating-join:hover { transform: translateY(-5px); background: white; }
+
     #loader { text-align: center; padding: 2rem; color: var(--navy); }
     .no-results { text-align: center; width: 100%; grid-column: 1 / -1; padding: 2rem; color: #666; display: none; }
   </style>
 </head>
 <body>
+
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSdzH0o2b6W7lGXaG3gieKQKRcCfsQP7toNpJekuIog23ECxWw/viewform" class="floating-join" target="_blank">
+    <span>✨</span> ¿Quieres aparecer aquí?
+  </a>
 
   <header>
     <a href="index.html" class="back-btn">◀ Volver a la Portada</a>
@@ -96,23 +131,29 @@
 
     <div id="btnContainer">
       <button class="filter-btn active" onclick="setCategory('all', this)">Todos</button>
-      <button class="filter-btn" onclick="setCategory('Hogar', this)">Hogar</button>
-      <button class="filter-btn" onclick="setCategory('Salud', this)">Salud</button>
-      <button class="filter-btn" onclick="setCategory('Servicios', this)">Servicios</button>
-      <button class="filter-btn" onclick="setCategory('Alimentos', this)">Alimentos</button>
+    <!--  <button class="filter-btn" onclick="setCategory('Hogar', this)">Hogar</button>
+      <button class="filter-btn" onclick="setCategory('Salud', this)">Salud</button> -->
+      <button class="filter-btn" onclick="setCategory('Servicios', this)">Mecánica</button>
+      <button class="filter-btn" onclick="setCategory('Alimentos', this)">Plomería</button>
     </div>
   </div>
 
   <div id="loader">Cargando talentos...</div>
   
-  <div id="grid" class="directory-grid">
-    </div>
+  <div id="grid" class="directory-grid"></div>
   <div id="noResults" class="no-results">No encontramos coincidencias para tu búsqueda.</div>
 
+  <section class="join-section">
+    <h2>Emprendedores del Reino</h2>
+    <p>¿Tienes un talento o negocio que quieras poner al servicio de la iglesia? Únete a nuestro directorio y haz que la comunidad te encuentre.</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdzH0o2b6W7lGXaG3gieKQKRcCfsQP7toNpJekuIog23ECxWw/viewform" class="btn-form" target="_blank">Llenar Formulario</a>
+  </section>
+
+  <footer style="text-align: center; padding: 3rem; opacity: 0.5; font-size: 0.8rem;">
+    Hebreos 11 Conecta · 2026
+  </footer>
+
   <script>
-    // ==========================================
-    // ⚠️ RECUERDA PEGAR TU LINK CSV AQUÍ ABAJO
-    // ==========================================
     const googleSheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTseyKCujETDIdNc-9RVfVRSHQBvmezwAEokvonUDPqYrQDsJeZEaBB5lu72zi9qLguQ9YY2joNxKn6/pub?gid=901159867&single=true&output=csv"; 
 
     let allTalents = [];
@@ -125,44 +166,34 @@
         complete: function(results) {
           allTalents = results.data;
           document.getElementById('loader').style.display = 'none';
-          applyFilters(); // Mostrar todo al inicio
+          applyFilters(); 
         }
       });
     }
 
-    // 1. Función para seleccionar categoría
     function setCategory(category, btnElement) {
       currentCategory = category;
-      
-      // Actualizar estilo visual de los botones
       const buttons = document.querySelectorAll('.filter-btn');
       buttons.forEach(btn => btn.classList.remove('active'));
       btnElement.classList.add('active');
-
-      // Aplicar filtros
       applyFilters();
     }
 
-    // 2. Función Maestra de Filtrado (Busca texto + Categoría)
     function applyFilters() {
       const searchTerm = document.getElementById('searchInput').value.toLowerCase();
       const grid = document.getElementById('grid');
       const noResults = document.getElementById('noResults');
       
-      grid.innerHTML = ""; // Limpiar grid
+      grid.innerHTML = ""; 
       let visibleCount = 0;
 
       allTalents.forEach(item => {
-        if(!item.Nombre) return; // Saltar filas vacías
+        if(!item.Nombre) return; 
 
-        // Filtro 1: ¿Coincide la categoría?
         const matchCategory = currentCategory === 'all' || (item.Categoria && item.Categoria.includes(currentCategory));
-
-        // Filtro 2: ¿Coincide el texto (Nombre o Profesión)?
         const textData = (item.Nombre + " " + item.Profesion).toLowerCase();
         const matchSearch = textData.includes(searchTerm);
 
-        // Si CUMPLE AMBOS, mostrar
         if(matchCategory && matchSearch) {
           visibleCount++;
           const imageSrc = item.Foto && item.Foto.length > 5 ? item.Foto : 'https://via.placeholder.com/150?text=Talento';
@@ -186,12 +217,7 @@
         }
       });
 
-      // Mostrar mensaje si nadie cumple los requisitos
-      if(visibleCount === 0) {
-        noResults.style.display = "block";
-      } else {
-        noResults.style.display = "none";
-      }
+      noResults.style.display = (visibleCount === 0) ? "block" : "none";
     }
 
     init();
